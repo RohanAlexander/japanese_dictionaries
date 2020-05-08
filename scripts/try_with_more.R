@@ -33,8 +33,8 @@ all <-
 # Change the following to "ア|"
 all <- 
   all %>% 
-  mutate(raw = str_replace_all(raw, "ア1", "ア|"),
-         raw = str_replace_all(raw, "ア1", "ア|"),
+  mutate(raw = str_replace_all(raw, "ア1", "ア—"),
+         raw = str_replace_all(raw, "ア1", "ア—"),
   )
 
 # Sometimes they are small
@@ -45,7 +45,7 @@ all <-
          raw = str_replace_all(raw, "ぅ", "う"),
   )
 
-# Fix some es
+# Fix some e
 all <- 
   all %>% 
   mutate(raw = str_replace_all(raw, "之", "え"),
@@ -76,9 +76,8 @@ o[start:(start+15),]
 rm(start)
 
 # Talk to John:
-# For a: line 3070, there is some weird: "あ9" thing
+# For a: line 3070, there is some weird: "あ9" thing - 9 should be "り"
 # For i: line 3044, there is some weird: "い9" thing
-# OCR really struggled with "う" - Confirm that's what it's mean to be eg on top row of u PDF.
 
 
 
@@ -152,11 +151,17 @@ o <-
   mutate(letter = "o")
 
 all <- rbind(a, e, i, o, u)
-rm(a, e, i, o, u)
+
 
 write_csv(all, "outputs/02_after_cleaning/all.csv")
 
+write_csv(a, "outputs/02_after_cleaning/a.csv")
+write_csv(e, "outputs/02_after_cleaning/e.csv")
+write_csv(i, "outputs/02_after_cleaning/i.csv")
+write_csv(o, "outputs/02_after_cleaning/o.csv")
+write_csv(u, "outputs/02_after_cleaning/u.csv")
 
+rm(a, e, i, o, u)
 
 
 
