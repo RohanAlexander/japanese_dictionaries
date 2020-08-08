@@ -6,9 +6,11 @@ library(tesseract)
 # https://cran.r-project.org/web/packages/tesseract/vignettes/intro.html
 
 
-pngfile <- pdftools::pdf_convert('inputs/Sample dictionary pages.pdf', dpi = 600)
+pngfile <- ?pdftools::pdf_convert('inputs/00-sample dictionary pages.pdf', dpi = 600)
 
 pngfile[1]
+
+pngfile <- 
 
 tesseract_info()
 
@@ -24,16 +26,16 @@ tesseract_download("jpn_vert")
 japanese_vertical <- tesseract("jpn_vert")
 
 
-text <- ocr("top_row_of_first_page.png", engine = japanese_vertical)
+text <- ocr("inputs/a.png", engine = japanese_vertical)
 
 
 english_and_japanese <- tesseract("eng+jpn_vert")
 
 # Try pre-processing a bit more
 library(magick)
-image_read(pngfile[1]) %>% 
+image_read("inputs/a.png") %>% 
   # image_info()
-  image_crop("1700x1050+300+270") %>% 
+  # image_crop("1700x1050+300+270") %>% 
   image_convert(colorspace = 'gray') %>%
   image_trim() %>% 
   # image_scale("x2000") %>% 

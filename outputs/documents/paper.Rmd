@@ -1,0 +1,64 @@
+---
+title: "Notes and approaches to OCR"
+author: "Rohan Alexander, John Tang, Diego Mamanche Castellanos"
+date: "08 August 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+A crucial aspect of the data science workflow is gathering data...
+
+The Portable Document Format (PDF) is widely used for documents that ... 
+
+However, this advantage means that the data in PDFs cannot be used for quantitiative statistical analysis... 
+
+Sometimes you can just copy paste.... 
+
+But other times it's an image....
+
+Hence, optical character recognition (OCR)...
+
+In this paper we review various OCR options for researchers who need to gather data from PDFs that must be OCR....
+
+When they consider a primer on what OCR options exist these days depending on your technical ability and then how they perform for an easy example and then how they perform for a hard example (the Japanese extract) and finally some suggestions for what is needed in the future....
+
+
+Our paper represents...
+
+The remainder of this paper is structured as follows...
+
+
+
+# Data
+
+## OCR options
+
+**(Diego: please add options here in a table and then a brief write-up of each - costs, access, technical requirements, etc.)**
+
+## Test samples
+
+Japanese dictionaries...
+
+
+
+
+# Evaluation
+
+
+For each option, we rank them based on two scales: results and difficulty. We need to work out a definition for each of these. 
+
+
+The main aspect of the end product will be a graph with two axis, and dots for where each service is positioned, coloured or faceted by the test.
+
+
+
+# Discussion
+
+
+# References
+
