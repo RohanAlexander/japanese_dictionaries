@@ -38,7 +38,21 @@ The remainder of this paper is structured as follows...
 
 ## OCR options
 
-**(Diego: please add options here in a table and then a brief write-up of each - costs, access, technical requirements, etc.)**
+
+| OCR Tool                             | Company	 | Type           |	Pricing |	Tech Requierements |
+| ------------------------------------ | --------- | -------------- | ------- | ------------------ |
+| Azure Cognitive Services (OCR)       | Microsoft | API		        |         |                    |
+| Amazon Rekognition	                 | Amazon	   | API		        |         |                    |
+| Tesseract		                         |           | R library      | Free	  |                    |
+| OpenCV		                           |           | Python Library | Free	  |                    |
+| Watson Visual Recognition	           | IBM	     | API		        |         |                    |
+| Kraken		                           |           | Python Library	| Free	  |                    |
+| Google Vision (for Text recognition) | Google	   | API		        |         |                    |
+| SwiftOCR	(iOS)                      | Apple	   | Swift Library  |         |                    | 		
+| Amazon Textract	                     | Amazon	   | API		        |         |                    |
+|	Tensorflow                           | Google    | Python Library | Free    |                    |			
+
+
 
 ## Test samples
 
