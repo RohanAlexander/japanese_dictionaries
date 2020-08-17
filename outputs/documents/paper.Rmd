@@ -44,6 +44,7 @@ The remainder of this paper is structured as follows...
 | Azure Cognitive Services (OCR)       | Microsoft | API		        |         |                    |
 | Amazon Rekognition	                 | Amazon	   | API		        |         |                    |
 | Tesseract		                         |           | R library      | Free	  |                    |
+| PyTesseract                          |           | Python Library | Free    |                    |
 | OpenCV		                           |           | Python Library | Free	  |                    |
 | Watson Visual Recognition	           | IBM	     | API		        |         |                    |
 | Kraken		                           |           | Python Library	| Free	  |                    |
