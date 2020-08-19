@@ -47,7 +47,7 @@ The remainder of this paper is structured as follows...
 | PyTesseract (Wrapper Google's OCR Engine)    |           | Python Library | Free    |                    |
 | OpenCV		                           |           | Python Library | Free	  |                    |
 | Watson Visual Recognition	           | IBM	     | API		        |         |                    |
-| Kraken		                           |           | Python Library	| Free	  |                    |
+| Kraken	(Linux OS)                   |           | Python Library	| Free	  |                    |
 | Google Vision (for Text recognition) | Google	   | API		        |         |                    |
 | SwiftOCR	(iOS)                      | Apple	   | Swift Library  |         |                    | 		
 | Amazon Textract	                     | Amazon	   | API		        |         |                    |
@@ -67,8 +67,12 @@ Japanese dictionaries...
 
 For each option, we rank them based on two scales: results and difficulty. We need to work out a definition for each of these. 
 
+Diego's comment: From what I learned so far, it could be easiness (an API is more straightforward than a library), number of characters correctly recognized, flexibility (the opposite of easiness), and cost. Moreover, some APIs such as Google's groups more than one character, whereas Azure returns only one character per boundary.
+
 
 The main aspect of the end product will be a graph with two axis, and dots for where each service is positioned, coloured or faceted by the test.
+
+
 
 
 
