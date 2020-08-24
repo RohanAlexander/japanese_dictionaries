@@ -11,26 +11,60 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction
 
-A crucial aspect of the data science workflow is gathering data...
-
-The Portable Document Format (PDF) is widely used for documents that ... 
-
-However, this advantage means that the data in PDFs cannot be used for quantitiative statistical analysis... 
-
-Sometimes you can just copy paste.... 
-
-But other times it's an image....
-
-Hence, optical character recognition (OCR)...
-
-In this paper we review various OCR options for researchers who need to gather data from PDFs that must be OCR....
-
-When they consider a primer on what OCR options exist these days depending on your technical ability and then how they perform for an easy example and then how they perform for a hard example (the Japanese extract) and finally some suggestions for what is needed in the future....
+A crucial aspect of the data science workflow is gathering data. It involves the tools and methods used to collect information in an established systematic fashion and identify the variables being measured. It also describes the methods used to obtain the data. Although the data collection component of research remains the same regardless of the field of study, the methods used vary among those fields of study as they have different interests. Moreover, the diversity of data types adds complexity to the process of gathering data. Structured data is organized in a highly regular manner or a pre-defined data model where the regularities apply to all the data in a particular dataset. Some examples are tables and relations. Semi-structured data contains this same information, but instead of having regular structures applied to all items in the dataset, the data might be interpreted with structural information. It can be supplied as tags e.g. name = "Bob" but also other markers to separate semantic elements and enforce hierarchies of records and fields within the data. Finally, Unstructured data, such as texts or images, holds information with no explicit structured data, such as tags. However, these tags may be assigned using manual or automatic techniques, converting the unstructured data to semi-structured data (Robert M. Losee, 2005). This diversity and complexity of data structures complicate, even more, the data gathering process as each data type may require a specific gathering approach(es) when needed.
 
 
-Our paper represents...
+The Portable Document Format (PDF) is an example of unstructured data created by the company Adobe in the 90s. It is widely used for documents. According to the ISO 32000-2:2017, the latest edition of the PDF Reference (2.0), PDF enables users to exchange and view electronic documents easily and reliably, independent of the environment in which they were created or the environment in which they are viewed or printed. It is intended to fulfill the following requirements:
 
-The remainder of this paper is structured as follows...
+- preservation of document fidelity independent of the device, platform, and software,
+- merging of content from diverse sources — Web sites, word processing and spreadsheet
+programs, scanned documents, photos, and graphics — into one self-contained document while
+maintaining the integrity of all original source documents,
+- an extensible metadata model at the document and object level,
+- collaborative editing of documents from multiple locations or platforms,
+- digital signatures to certify authenticity,
+- security and permissions to allow the creator to retain control of the document and associated
+rights,
+- accessibility of content to those with disabilities,
+- extraction and reuse of content for use with other file formats and applications, and
+- electronic forms to gather and/or represent data within business systems.
+
+To mention some of the features incorporated in this version we have:
+
+- 12.10, "Geospatial features";
+- 13.7, "Rich media" annotations;
+- 14.7.4, "Namespaces" for tagged PDF;
+- 14.9.6, "Pronunciation hints";
+- 14.12, "Document parts";
+- 14.13, "Associated files";
+- Support for PRC (see 13.6, "3D Artwork");
+- Support for UTF-8. 
+
+However, these advantages mean that the data in PDFs cannot be used for quantitative statistical analysis. The reason is that it needs measurable and verifiable data. But PDF documents, as it was mentioned previously, can have different objects, some of them non-static objects compressed in the same document. This situation makes it difficult to extract valuable information from the paper.
+
+
+Sometimes just by copying and pasting the information directly from the PDF is possible when it contains simple texts or regular tables. In that case, there is no barrier in the process of extracting data. But other times it is not as easy if it is an image, a survey form, or complex shapes containing relevant information, . Furthermore, there is a linguistic component that adds more complexity. For instance, it is well known that non-Latin characters such as Japanese, Chinese, Arabic, among others, generate several difficulties in different stages of the text mining process. It is because those characters have complicated structures, a huge number of categories, and resemblance among characters, font unevenness, or writing styles. In those cases, the need for reliable tools or methods with the ability to elicit data becomes extremely important.
+
+
+Optical character recognition (OCR), a process that transforms a bitmapped image of printed or handwritten text into text code, and thereby making it machine-readable, has been widely used for scientists trying to capture the images of characters and texts back in the 50s. First, by mechanical and optical means of rotating disks and photomultiplier flying spot scanner with a cathode ray tube lens, followed by photocells and arrays of them. The OCR process was slow, and one line of characters could be digitized at a time. Nowadays, in OCR, once a printed or handwritten text has been captured optically by a scanner or some other optical means, the digital image goes through the following stages of a computer recognition system (Cheriet, Mohamed; Kharma, 2007):
+
+- The preprocessing stage that enhances the quality of the input image and locates
+the data of interest.
+- The feature extraction stage that captures the distinctive characteristics of the
+digitized characters for recognition.
+- The classification stage that processes the feature vectors to identify the characters and words.
+
+
+In this paper we review various OCR options for researchers who need to gather data from PDFs in which the text must be extracted to be reused, edited, or reformatted; the text should be available for full-text information retrieval; the text is to be coded in HTML or SGML; the text should be available to adaptive equipment for the visually impaired; the file size is of concern (in terms of storage or bandwidth to transmit); or the resources are available to perform OCR and correct the output.
+
+
+
+
+**When they consider a primer on what OCR options exist these days depending on your technical ability and then how they perform for an easy example and then how they perform for a hard example (the Japanese extract) and finally some suggestions for what is needed in the future....**
+
+**Our paper represents...**
+
+**The remainder of this paper is structured as follows...**
 
 
 
@@ -39,18 +73,18 @@ The remainder of this paper is structured as follows...
 ## OCR options
 
 
-| OCR Tool                             | Company	 | Type           |	Pricing |	Tech Requierements |
+| OCR Tool                             | Company	 | Type           |	Monthly Price Aug/2020 |	Tech Requierements |
 | ------------------------------------ | --------- | -------------- | ------- | ------------------ |
-| Azure Cognitive Services (OCR)       | Microsoft | API		        |         |                    |
-| Amazon Rekognition	                 | Amazon	   | API		        |         |                    |
+| Azure Cognitive Services (OCR)       | Microsoft | API		        | Free Web Container: 5000/Free; <br/> <br/> S1 Web Container: 0-1M/$1.50 per 1,000 trans, 1M-5M/$1 per 1,000 trans, 5M-10M/$0.65 per 1,000 trans, 10M-100M/$0.65 per 1,000 trans, +100M/$0.65 per 1,000 trans        |                    |
+| Amazon Rekognition	                 | Amazon	   | API		        | First 1 million images: $0.001 per image <br/> <br/> Next 9 million images $0.0008 per image <br/> <br/> Next 90 million images $0.0006 per image <br/> <br/> Over 100 million images $0.0004 per image         |                    |
 | Tesseract		                         |           | R library      | Free	  |                    |
 | PyTesseract (Wrapper Google's OCR Engine)    |           | Python Library | Free    |                    |
 | OpenCV		                           |           | Python Library | Free	  |                    |
-| Watson Visual Recognition	           | IBM	     | API		        |         |                    |
+| Watson Visual Recognition	           | IBM	     | API		        | Lite: 1000/Free, <br/> <br/> Standard: $0.002 per trans      |                    |
 | Kraken	(Linux OS)                   |           | Python Library	| Free	  |                    |
-| Google Vision (for Text recognition) | Google	   | API		        |         |                    |
+| Google Vision (for Text recognition) | Google	   | API		        | 1000/Free, 5 mill/$1.5, >5mill/$0.6        |                    |
 | SwiftOCR	(iOS)                      | Apple	   | Swift Library  |         |                    | 		
-| Amazon Textract	                     | Amazon	   | API		        |         |                    |
+| Amazon Textract	                     | Amazon	   | API		        | First 1 Million pages: $0.015 - $0.05 per page, <br/> <br/> Over 1 Million pages: $0.01 - $0.04 per page        |                    |
 |	Tensorflow                           | Google    | Python Library | Free    |                    |			
 
 
@@ -80,4 +114,9 @@ The main aspect of the end product will be a graph with two axis, and dots for w
 
 
 # References
+
+
+https://books-scholarsportal-info.myaccess.library.utoronto.ca/en/read?id=/ebooks/ebooks2/wiley/2011-12-13/1/9780470176535
+
+https://www.researchgate.net/publication/267465115_An_Overview_and_Applications_of_Optical_Character_Recognition
 
