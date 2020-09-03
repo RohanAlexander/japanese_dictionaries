@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, include=FALSE, warning=FALSE}
 library("reticulate")
 ```
 
@@ -114,7 +114,7 @@ Among the Microsoft Azure's portfolio, Azure Cognitive Services offers Computer 
 
 In python we need several libraries for calling the API.
 
-```{python}
+```{python eval=FALSE, include=TRUE}
 import os
 import sys
 import requests
@@ -125,7 +125,6 @@ from matplotlib.patches import Rectangle
 from PIL import Image
 from io import BytesIO
 import matplotlib
-import matplotlib.font_manager as font_manager
 from os import path
 import ast
 ```
@@ -172,7 +171,7 @@ Figure 1 presents a sample that corresponds to a Japanese text, but it also cont
 
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure1.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure1_full.png)
 **Figure 1**
 
 ### Regions
@@ -180,7 +179,7 @@ Figure 1 presents a sample that corresponds to a Japanese text, but it also cont
 The blue line figure 2 denotes the segment from the image that includes the characters. In this example, there is only one blue line because the document is only text. In other cases, it may contain images requiring more than one region.
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure2.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure2_full.png)
  **Figure 2**
 
 
@@ -189,14 +188,14 @@ The blue line figure 2 denotes the segment from the image that includes the char
 Once the region is defined, the API provides in figure 3 (red rectangles) the subsets of characters of the region called Lines. From the example, we can see that some characters are not included in any of the lines. Those characters are not recognized by the API. 
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure3.png)   
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure3_full.png)   
  **Figure 3**
 
 ### The Character Boundaries
 
 After the lines are identified, the API provides in figure 4 each recognized character bounding boxes. Those without a yellow square were not recognized by the API in this example.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure4.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure4_full.png)
  **Figure 4**
 
 ### Characters
@@ -204,7 +203,7 @@ After the lines are identified, the API provides in figure 4 each recognized cha
 Once the bounding boxes are located, each character takes its corresponding place, as it is shown in figure 5.
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure5.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure5_full.png)
  **Figure 5**
 
 
@@ -219,12 +218,12 @@ The API is easy to use after reading the documentation. It offers an example of 
 
 Even though the API offers the possibility to self-detect the language, It changes the order in which the characters should be in the output. In figures 6 we can see that the first line provided by the self-detection approach is located in the middle. This situation does not allow a correct interpretation of the text because it does not follow the reading pattern. In this case, it is a vertical orientation, which means we have to read it from right to left.  
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure6.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure6_full.png)
  **Figure 6**
 
 When the parameter language is stated as Japanese since the beginning, as we can see in figure 7, it recognizes the first line correctly. 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure7.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure7_full.png)
  **Figure 7**
 
 In general, self-detection and the case with the language parameter as the Japanese do not generate the boundaries correctly. In Figures 6 and 7, we can observe that both cross the line, which is not correct for in this document. There is a line delimiting the boundaries of the text, but it has been ignored by both API calls. This situation makes it difficult for researchers to organize the information correctly as the order of the characters matter.
@@ -234,8 +233,144 @@ In general, self-detection and the case with the language parameter as the Japan
 By doing some image preprocessing before the API call, it might be possible to see improvements in terms of boundary identification....
 
 
+## Google Vision OCR
+
+Google Vision API can integrate vision detection features, including image labeling, face and landmark detection, optical character recognition (OCR), and tagging of explicit content. The text recognition process detects text in images and recognizes the text contained therein. Once detected, the recognizer then determines the actual text in each block and segments it into lines and words.
+
+To evaluate this OCR option, we need the following python libraries.
+ 
+```{python eval=FALSE, include=TRUE}
+from os import path
+from PIL import Image
+from PIL import ImageFont
+from PIL import ImageDraw
+from PIL import ImageEnhance
+import base64 #Convert an image into base64 form for API requests
+import requests #API request - GET/POST
+import json
+import ast
+```
+
+Same as the Azure API, we need to create the headers and parameters necessary for calling the API. We also need the python library **requests** to make the API call. The method **post** is needed as the API uses the HTTP method POST.
+
+The following example illustrates how to state the headers and parameter, but also create two functions. The first one, called encode_image converts an image into base64, an encoding process designed to carry data stored in binary formats across channels that only reliably support text content. It can embed image files or other binary assets inside textual assets. The second one makes an HTTP POST request that calls Google's Vision API.
+
+```{python eval=FALSE, include=TRUE}
+#Create the URL for the API call. The endpoint corresponds to the Azure's 
+# endpoint of the account.
+url = "https://vision.googleapis.com/v1/images:annotate"
+
+querystring = {"key": google_vision_api_key }
+headers = {'Content-Type': "application/json"}
+
+def encode_image(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read())
+
+def image_request(image_path):
+
+    payload = '{\"requests\":[{\"image\":{\"content\":\"'+
+    encode_image(image_path).decode('utf-8')+
+    '"},\"features\":[{\"type\":\"TEXT_DETECTION\"}]}]}'
+
+    response = requests.request("POST", url, data=payload, headers=headers, params=querystring)
+
+    return ast.literal_eval(response.text)
+```
+
+This is an example of the response:
+
+```{} 
+{'responses': [{'textAnnotations': [{'locale': 'ja',
+     'description': '-]\n一\n一本の傘を二人でさすこと。多く男女二人の場合に一あい-えん [哀婉](名) 哀れにやさしいこと。 こと。しん【愛郷心](名) 愛婚の精神。.............名)あいく\n-[製~Q)
+     れ]()あ\nの。0子持鮎の願漬。\nあいきょうp®(愛郷](名)生まれ故郷を愛する\nに\nVド\nし
+     いこと。叉、その程度。\n信的思想た打破すること。\n',
+     'boundingPoly': {'vertices': [{'x': 26, 'y': 21},
+       {'x': 1556, 'y': 21},
+       {'x': 1556, 'y': 2748},
+       {'x': 26, 'y': 2748}]}},
+    {'description': '-',
+     'boundingPoly': {'vertices': [{'x': 1227, 'y': 686},
+       {'x': 1227, 'y': 677},
+       {'x': 1262, 'y': 677},
+       {'x': 1262, 'y': 686}]}},
+       
+       
+       すること。\n'}}]}
+           {'description': '誘',
+     'boundingPoly': {'vertices': [{'x': 785, 'y': 880},
+       {'x': 814, 'y': 880},
+       {'x': 814, 'y': 914},
+       {'x': 785, 'y': 914}]}},
+    {'description': '(',
+     'boundingPoly': {'vertices': [{'x': 775, 'y': 916},
+       {'x': 814, 'y': 916},
+       {'x': 814, 'y': 940},
+       {'x': 775, 'y': 940}]}},
+    ...],
+```
+
+From the previous example, we can observe that the response returns a list of nested dictionaries. The first nested dictionary called **textAnnotations** consists of a list of nested dictionaries. Each one of those has a description (character) and boundingPoly (boundaries of the characters).
+
+
+### BoundingPoly
+
+Each boundingPoly consist of vertices in which the symbol is located.
+
+#### Region
+
+Te first object in the nested dictionary contains all identified characters in the image as well as the boundaries that comprises the location of those characters. This object can resemble the idea of the region provided in the Azure's API.
+
+Figure 8 shows the region identified by the API.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure8.png)
+ **Figure 8**
+ 
+
+#### The Character Boundaries
+
+The remaining objects enclose the boundaries of the characters. As it is shown in figure 9, each boundingPoly node can include one or more characters.
+
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure9.png)
+**Figure 9**
+
+### Characters
+
+Once the bounding boxes are located, each character takes its corresponding place, as it is shown in figure 10. **Pending find a way to plot the text in vertical form to make it readable.**
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure10.png)
+**Figure 10**
+
+### languageHints
+
+Google Vision API offers the advantage of including in the request language hints. It consists of a list of languages the user knows in advance the image contains. For this study, we run two versions, one without hints and the other one with a list of two hints, such as Japanese and English, as the image contains some words in English.
+
+
+### Advantages and Disadvantages
+
+#### Advantages
+
+Same as the Azure API, this is also easy to use after reading the documentation. It also offers several examples in different programming languages using the Google libraries for Python. It gives the possibility to include languages in advanced as hints, and identifies the orientation automatically. The response contains an object with all identified characters in the correct order.
+
+Moreover, the API gives the opportunity to send the image in base64 format or using an internal (google storage) or external URL.
+
+#### Disadvantages
+
+Not clear at the moment.....I need to solve how to plot grouped characters vertically. 
+
+### Future Work
+
+
+.........
+
 
 ## PyTesseract - Python Library
+
+
+
+
+
 
 
 # Evaluation
@@ -254,6 +389,8 @@ The main aspect of the end product will be a graph with two axis, and dots for w
 
 # Discussion
 
+# Appendix
+
 
 # References
 
@@ -266,5 +403,9 @@ The main aspect of the end product will be a graph with two axis, and dots for w
 4: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/home
 
 5: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/quickstarts/python-print-text
+
+6: https://cloud.google.com/vision/docs/ocr
+
+
 
 
