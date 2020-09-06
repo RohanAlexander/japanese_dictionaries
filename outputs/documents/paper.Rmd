@@ -368,8 +368,110 @@ Not clear at the moment.....I need to solve how to plot grouped characters verti
 ## PyTesseract - Python Library
 
 
+Python-Tesseract is an optical character recognition (OCR) library for python. It is a wrapper for Google's Tesseract-OCR Engine. PyTesseract can read all image types such as png, jpeg, gif, tiff, BMP, among others. It is widely used to process everything from scanned documents. This inbuilt library of python performs the OCR techniques on the image to produce the digitized output text in a readable and editable form.
+
+To use this library, we need to install Tesseract. For this study, we use version 4. IT is necessary to call the .exe file to use Tesseract with PyTesseract. See the following example.
+
+```{python eval=FALSE, include=TRUE}
+#Call .exe location for Windows
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' 
+```
+
+Along with the PyTesseract library, the following libraries are used.
+
+```{python eval=FALSE, include=TRUE}
+from PIL import Image
+from PIL import ImageOps
+import pytesseract
+from os import path
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+```
+
+PyTesseract offers several methods with different outputs when processing an image to extract text. According to Pypi.org, the uses of those methods are:
+
+- **image_to_string:** Returns the result of a Tesseract OCR run on the image to string
+- **image_to_boxes** Returns result containing recognized characters and their box boundaries
+- **image_to_data:** Returns result containing box boundaries, confidences, and other information. Requires Tesseract 3.05+. For more information, please check the Tesseract TSV documentation
+- **image_to_osd:** Returns result containing information about orientation and script detection.
+- **image_to_alto_xml:** Returns result in the form of Tesseract’s ALTO XML format.
+- **run_and_get_output:** Returns the raw output from Tesseract OCR. Gives a bit more control over the parameters that are sent to tesseract.
 
 
+For this analysis, we use the method image_to_data as this offers the boundaries and the recognized characters in a handy form so we can understand the process. Furthermore, in PyTesseract, it is needed to specify the language in advance. Since PyTesseract is a wrapper of Google's Tesseract-OCR Engine, Tesseract-OCR must have installed all required languages. In this case, it is Japanese, which is not included in its out-of-the-box version. To include a new language, adding the **.traineddata** file into the Tesseract-OCR/tessdata folder is sufficient. However, since the text in the image is vertical Japanese. It is necessary to include two files: jpn.traineddata and jpn_vert.traineddata. Once the files are located correctly, the following code extracts the text from the image.
+
+```{python eval=FALSE, include=TRUE}
+img1 = Image.open(r'~\inputs\00-sample-pages_1.png')
+image_to_data = pytesseract.image_to_data(img1, lang = 'jpn_vert')
+
+```
+
+The output from the previous code converted into a pandas dataframe is shown in figure 11.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure11.png)
+**Figure 11**
+
+From figure 11, we can observe that the output in the column **level** generates five levels. Those are pages, blocks, paragraphs, lines, and words (characters). Each one is subsets of the previous one.
+
+### Page
+
+For this example, the page resembles the concept of region, which is the largest area of the image enclosing all recognized characters. Figure 12 illustrates the page area.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure12.png)
+**Figure 12**
+
+### Blocks
+
+The blocks are subsets of the page area that consist of small groups of recognized characters. In figure 13, we can see that most of the blocks are well ordered. In terms of correctness of the boundaries, we can see that some of them overlap several characters that are not recognized by the library.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure13.png)
+**Figure 13**
+
+### Paragraphs
+
+Similar to the blocks, the paragraphs are subsets of blocks. These follow the same idea of subareas containing a set of characters. In this case, for example, we can look at paragraphs five and six, which are subsets of block five. It is interesting to see how the only paragraph (21) of block 12 is a smaller area compared to the block. This situation happens in several other blocks. See figure 14 for a better understanding.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure14.png)
+**Figure 14**
+
+### Lines
+
+
+Once the paragraphs are defined, the library provides in figure 15, the last subsets of characters called Lines. From the example, we can see that most of the characters are located in one of the lines. However, several others are not. Some of those cases are curious since there is no clear reason why those characters are not included. For instance, between the lines 65 and 66, two clear lines are not recognized by the library.
+
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure15.png)   
+ **Figure 15**
+
+### Character Boundaries
+
+
+These boundaries enclose the characters. Figure 16 shows that a character boundary can include one or more characters. However, some character boundaries overlap with other ones. Moreover, the same as the previous areas, several characters have been skipped with no apparent reason.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure16.png)   
+ **Figure 16**
+
+### Characters
+
+In terms of character-level recognition, we can observe that many characters are not recognized. Interestingly those characters are in a correct block, paragraph, line, and character boundary, but it was skipped. For example, in the first line and the first character boundary of this line, there are two words, but one of them is not recognized. Figure 17 illustrates this case.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure17.png)   
+ **Figure 17**
+
+
+### Advantages and Disadvantages
+
+#### Advantages
+
+.......
+
+#### Disadvantages
+
+.....................
+
+### Future Work
 
 
 
@@ -405,6 +507,14 @@ The main aspect of the end product will be a graph with two axis, and dots for w
 5: https://docs.microsoft.com/en-us/azure/cognitive-services/computer-vision/quickstarts/python-print-text
 
 6: https://cloud.google.com/vision/docs/ocr
+
+7: https://pypi.org/project/pytesseract/
+
+8: https://github.com/tesseract-ocr/tessdata
+
+9: https://github.com/UB-Mannheim/tesseract/wiki
+
+
 
 
 
