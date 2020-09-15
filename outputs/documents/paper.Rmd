@@ -489,6 +489,18 @@ The main aspect of the end product will be a graph with two axis, and dots for w
 
 
 
+## Amazon Textract
+
+According to Amazon's website, Amazon Textract can detect Latin-script characters from the standard English alphabet and ASCII symbols. 
+
+https://aws.amazon.com/textract/faqs/
+
+## Amazon Rekognition
+
+
+
+
+
 # Discussion
 
 # Appendix
