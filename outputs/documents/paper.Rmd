@@ -473,6 +473,39 @@ In terms of character-level recognition, we can observe that many characters are
 
 ### Future Work
 
+## Kraken - Python Library
+
+Kraken is a python library created by Benjamin Kiessling from Université PSL in France and Leipzig University. This library is a combination of a fork (independent development built on an existing one) from the Ocropus package and CLSTM neural network library. Its purpose was to improve accuracy and performance rates compared with Ocropus. It has been tested with languages such as Arabic, Persian, Syriac Polytonic Greek, Latin, among other. However, there is no information about japanese-trained models.  
+
+
+To assess the performance of this library, it is necessary to train a model for japanese texts. To do that, Kraken offers a  function called **train**. This function expects a series of images that according to Kraken´s website, these images must be high quality scans, preferably color or grayscale, and at least 300dpi. Images in PDF format are not allowed. Each image must be accompanied with a text file with extension .gt.txt. This file will contain the character(s) that corresponds to the image with the same name. For instance in figure xx we see the image file is called **sec1_line1.png**, the pair-wise text element for this image is **sec_line.gt.txt**.
+
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure18.png)   
+ **Figure 18**
+ 
+After the training stage, Kraken analyses the layout and extracts text lines from an input image for later processing by the recognition. A step by step process is provided by Kraken´s website (http://kraken.re/index.html) to recognize text from an image using the model we want. 
+
+
+
+### Training process challenges
+
+The training process itself is very friendly. However, the data preparation is the most important part as it generates the samples we feed into the model. Other studies pointed out that for languages such as Arabic, at least 800 lines are required to train a descent model. For the japanese text of this study we trained 36 lines in which several characters appear more than once.
+
+
+
+## Amazon Textract
+
+According to Amazon's website, Amazon Textract can detect Latin-script characters from the standard English alphabet and ASCII symbols. 
+
+https://aws.amazon.com/textract/faqs/
+
+
+## Amazon Rekognition
+
+According to Amazon's website, Amazon Rekognition supports text in most Latin scripts and numbers. Text detection recognizes up to 50 sequences of characters per the image or video frame and lists them as words and lines.
+
+https://aws.amazon.com/rekognition/faqs/
 
 
 # Evaluation
@@ -484,20 +517,6 @@ Diego's comment: From what I learned so far, it could be easiness (an API is mor
 
 
 The main aspect of the end product will be a graph with two axis, and dots for where each service is positioned, coloured or faceted by the test.
-
-
-
-
-
-## Amazon Textract
-
-According to Amazon's website, Amazon Textract can detect Latin-script characters from the standard English alphabet and ASCII symbols. 
-
-https://aws.amazon.com/textract/faqs/
-
-## Amazon Rekognition
-
-
 
 
 
