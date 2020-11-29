@@ -51,7 +51,7 @@ To mention some of the features incorporated in this version we have:
 However, these advantages mean that the data in PDFs cannot be used for quantitative statistical analysis. The reason is that it needs measurable and verifiable data. But PDF documents, as it was mentioned previously, can have different objects, some of them non-static objects compressed in the same document. This situation makes it difficult to extract valuable information from the paper.
 
 
-Sometimes just by copying and pasting the information directly from the PDF is possible when it contains simple texts or regular tables. In that case, there is no barrier in the process of extracting data. But other times it is not as easy if it is an image, a survey form, or complex shapes containing relevant information, . Furthermore, there is a linguistic component that adds more complexity. For instance, it is well known that non-Latin characters such as Japanese, Chinese, Arabic, among others, generate several difficulties in different stages of the text mining process. It is because those characters have complicated structures, a huge number of categories, and resemblance among characters, font unevenness, or writing styles. In those cases, the need for reliable tools or methods with the ability to elicit data becomes extremely important.
+Sometimes just by copying and pasting the information directly from the PDF is possible when it contains simple texts or regular tables. In that case, there is no barrier in the process of extracting data. But other times it is not as easy if it is an image, a survey form, or complex shapes containing relevant information. Furthermore, there is a linguistic component that adds more complexity. For instance, it is well known that non-Latin characters such as Japanese, Chinese, Arabic, among others, generate several difficulties in different stages of the text mining process. It is because those characters have complicated structures, a huge number of categories, and resemblance among characters, font unevenness, or writing styles. In those cases, the need for reliable tools or methods with the ability to elicit data becomes extremely important.
 
 
 Optical character recognition (OCR), a process that transforms a bitmapped image of printed or handwritten text into text code, and thereby making it machine-readable, has been widely used for scientists trying to capture the images of characters and texts back in the 50s. First, by mechanical and optical means of rotating disks and photomultiplier flying spot scanner with a cathode ray tube lens, followed by photocells and arrays of them. The OCR process was slow, and one line of characters could be digitized at a time. Nowadays, in OCR, once a printed or handwritten text has been captured optically by a scanner or some other optical means, the digital image goes through the following stages of a computer recognition system $(Cheriet, Mohamed; Kharma, 2007)^3$:
@@ -83,6 +83,11 @@ In this paper we review various OCR options for researchers who need to gather d
 
 Japanese dictionaries...
 
+For the purpose of this study, one page from the letter a in the Japanese dictionary was taken to assess the tools. This image contains 3293 characters. Words in English were counted as one character for this analysis. MOreover, the sample text was divided into four images as it is illustrated in figure XX. These new images were assessed across all tools.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/sections.png)
+**Figure XX**
+
 
 ## OCR options
 
@@ -95,15 +100,12 @@ The following list contains some of the OCR APIs and libraries available that wi
 | ------------------------------------ | --------- | -------------- | ------- | ------------------ |
 | Azure Cognitive Services (OCR)       | Microsoft | API		        | Free Web Container: 5000/Free; <br/> <br/> S1 Web Container: 0-1M/$1.50 per 1,000 trans, 1M-5M/$1 per 1,000 trans, 5M-10M/$0.65 per 1,000 trans, 10M-100M/$0.65 per 1,000 trans, +100M/$0.65 per 1,000 trans        |                    |
 | Amazon Rekognition	                 | Amazon	   | API		        | First 1 million images: $0.001 per image <br/> <br/> Next 9 million images $0.0008 per image <br/> <br/> Next 90 million images $0.0006 per image <br/> <br/> Over 100 million images $0.0004 per image         |                    |
-| Tesseract		                         |           | R library      | Free	  |                    |
 | PyTesseract (Wrapper Google's OCR Engine)    |           | Python Library | Free    |                    |
-| OpenCV		                           |           | Python Library | Free	  |                    |
-| Watson Visual Recognition	           | IBM	     | API		        | Lite: 1000/Free, <br/> <br/> Standard: $0.002 per trans      |                    |
+Standard: $0.002 per trans      |                    |
 | Kraken	(Linux OS)                   |           | Python Library	| Free	  |                    |
 | Google Vision (for Text recognition) | Google	   | API		        | 1000/Free, 5 mill/$1.5, >5mill/$0.6        |                    |
-| SwiftOCR	(iOS)                      | Apple	   | Swift Library  |         |                    | 		
 | Amazon Textract	                     | Amazon	   | API		        | First 1 Million pages: $0.015 - $0.05 per page, <br/> <br/> Over 1 Million pages: $0.01 - $0.04 per page        |                    |
-|	Tensorflow                           | Google    | Python Library | Free    |                    |			
+|	Kindai-OCR                           | Google    | Python Library | Free    |                    |			
 
 
 
@@ -167,11 +169,11 @@ Here we have an example of the response:
 
 ### Language and Orientation
 
-Figure 1 presents a sample that corresponds to a Japanese text, but it also contains English text in some fragments of the text. The API offers the possibility to do self-detection, which in this case is helpful, but also the opportunity to specify the language in advance. Moreover, the orientation can also be self-detected or not.
+Figure 1 presents a sample that corresponds to the section1 of the image containing Japanese text, but it also contains English text in some fragments of the text. The API offers the possibility to do self-detection, which in this case is helpful, but also the opportunity to specify the language in advance. Moreover, the orientation can also be self-detected or not.
 
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure1_full.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/azure-images/section1.png)
 **Figure 1**
 
 ### Regions
@@ -179,7 +181,7 @@ Figure 1 presents a sample that corresponds to a Japanese text, but it also cont
 The blue line figure 2 denotes the segment from the image that includes the characters. In this example, there is only one blue line because the document is only text. In other cases, it may contain images requiring more than one region.
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure2_full.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/azure-images/region-section1.png)
  **Figure 2**
 
 
@@ -188,14 +190,14 @@ The blue line figure 2 denotes the segment from the image that includes the char
 Once the region is defined, the API provides in figure 3 (red rectangles) the subsets of characters of the region called Lines. From the example, we can see that some characters are not included in any of the lines. Those characters are not recognized by the API. 
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure3_full.png)   
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/azure-images/lines-section1.png)   
  **Figure 3**
 
 ### The Character Boundaries
 
 After the lines are identified, the API provides in figure 4 each recognized character bounding boxes. Those without a yellow square were not recognized by the API in this example.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure4_full.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/azure-images/boundaries-section1.png)
  **Figure 4**
 
 ### Characters
@@ -203,7 +205,7 @@ After the lines are identified, the API provides in figure 4 each recognized cha
 Once the bounding boxes are located, each character takes its corresponding place, as it is shown in figure 5.
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure5_full.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/azure-images/characters-section1.png)
  **Figure 5**
 
 
@@ -228,9 +230,6 @@ When the parameter language is stated as Japanese since the beginning, as we can
 
 In general, self-detection and the case with the language parameter as the Japanese do not generate the boundaries correctly. In Figures 6 and 7, we can observe that both cross the line, which is not correct for in this document. There is a line delimiting the boundaries of the text, but it has been ignored by both API calls. This situation makes it difficult for researchers to organize the information correctly as the order of the characters matter.
 
-### Future Analysis 
-
-By doing some image preprocessing before the API call, it might be possible to see improvements in terms of boundary identification....
 
 
 ## Google Vision OCR
@@ -323,7 +322,7 @@ Te first object in the nested dictionary contains all identified characters in t
 
 Figure 8 shows the region identified by the API.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure8.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/google-images/sections.png)
  **Figure 8**
  
 
@@ -332,14 +331,15 @@ Figure 8 shows the region identified by the API.
 The remaining objects enclose the boundaries of the characters. As it is shown in figure 9, each boundingPoly node can include one or more characters.
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure9.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/google-images/boundaries.png)
 **Figure 9**
 
 ### Characters
 
 Once the bounding boxes are located, each character takes its corresponding place, as it is shown in figure 10. **Pending find a way to plot the text in vertical form to make it readable.**
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure10.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/google-images/characters.png)
+
 **Figure 10**
 
 ### languageHints
@@ -357,12 +357,7 @@ Moreover, the API gives the opportunity to send the image in base64 format or us
 
 #### Disadvantages
 
-Not clear at the moment.....I need to solve how to plot grouped characters vertically. 
 
-### Future Work
-
-
-.........
 
 
 ## PyTesseract - Python Library
@@ -419,21 +414,21 @@ From figure 11, we can observe that the output in the column **level** generates
 
 For this example, the page resembles the concept of region, which is the largest area of the image enclosing all recognized characters. Figure 12 illustrates the page area.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure12.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/page.png)
 **Figure 12**
 
 ### Blocks
 
 The blocks are subsets of the page area that consist of small groups of recognized characters. In figure 13, we can see that most of the blocks are well ordered. In terms of correctness of the boundaries, we can see that some of them overlap several characters that are not recognized by the library.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure13.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/blocks.png)
 **Figure 13**
 
 ### Paragraphs
 
 Similar to the blocks, the paragraphs are subsets of blocks. These follow the same idea of subareas containing a set of characters. In this case, for example, we can look at paragraphs five and six, which are subsets of block five. It is interesting to see how the only paragraph (21) of block 12 is a smaller area compared to the block. This situation happens in several other blocks. See figure 14 for a better understanding.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure14.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/paragraphs.png)
 **Figure 14**
 
 ### Lines
@@ -442,7 +437,7 @@ Similar to the blocks, the paragraphs are subsets of blocks. These follow the sa
 Once the paragraphs are defined, the library provides in figure 15, the last subsets of characters called Lines. From the example, we can see that most of the characters are located in one of the lines. However, several others are not. Some of those cases are curious since there is no clear reason why those characters are not included. For instance, between the lines 65 and 66, two clear lines are not recognized by the library.
 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure15.png)   
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/lines.png)   
  **Figure 15**
 
 ### Character Boundaries
@@ -450,28 +445,25 @@ Once the paragraphs are defined, the library provides in figure 15, the last sub
 
 These boundaries enclose the characters. Figure 16 shows that a character boundary can include one or more characters. However, some character boundaries overlap with other ones. Moreover, the same as the previous areas, several characters have been skipped with no apparent reason.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure16.png)   
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/boundaries.png)   
  **Figure 16**
 
 ### Characters
 
 In terms of character-level recognition, we can observe that many characters are not recognized. Interestingly those characters are in a correct block, paragraph, line, and character boundary, but it was skipped. For example, in the first line and the first character boundary of this line, there are two words, but one of them is not recognized. Figure 17 illustrates this case.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure17.png)   
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/characters.png)   
  **Figure 17**
-
 
 ### Advantages and Disadvantages
 
 #### Advantages
 
-.......
+The most important advantage is that this is a free library. It is also a wrapper from Google's Tesseract Engine. Moreover, the way it presents the covered areas are very detailed. It offers blocks, paragraphs, lines, boundaries, and finally the character level. 
 
 #### Disadvantages
 
-.....................
 
-### Future Work
 
 ## Kraken - Python Library
 
@@ -490,8 +482,12 @@ After the training stage, Kraken analyses the layout and extracts text lines fro
 
 ### Training process challenges
 
-The training process itself is very friendly. However, the data preparation is the most important part as it generates the samples we feed into the model. Other studies pointed out that for languages such as Arabic, at least 800 lines are required to train a descent model. For the japanese text of this study we trained 36 lines in which several characters appear more than once.
+The training process itself is very friendly. However, the data preparation is the most important part as it generates the samples we feed into the model. Other studies pointed out that for languages such as Arabic, at least 800 lines are required to train a descent model. For the Japanese text of this study we trained 36 lines in which several characters appear more than once. The result after the training process was not good, indicating that the need of greater sample data might be needed which is not in the scope of this study.
 
+
+# Other limitations
+
+In order to use this library it is required to have either Linux or Mac. In this study, we use Google Colab which is offers a Linux environment to assess the library.  
 
 
 ## Amazon Textract
