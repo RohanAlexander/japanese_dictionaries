@@ -105,7 +105,7 @@ Standard: $0.002 per trans      |                    |
 | Kraken	(Linux OS)                   |           | Python Library	| Free	  |                    |
 | Google Vision (for Text recognition) | Google	   | API		        | 1000/Free, 5 mill/$1.5, >5mill/$0.6        |                    |
 | Amazon Textract	                     | Amazon	   | API		        | First 1 Million pages: $0.015 - $0.05 per page, <br/> <br/> Over 1 Million pages: $0.01 - $0.04 per page        |                    |
-|	Kindai-OCR                           | Google    | Python Library | Free    |                    |			
+|	Kindai-OCR                           | Result of n2i Project    | Python Library | Free    |                    |			
 
 
 
@@ -464,6 +464,9 @@ The most important advantage is that this is a free library. It is also a wrappe
 #### Disadvantages
 
 
+## Kindai-OCR
+
+
 
 ## Kraken - Python Library
 
@@ -510,6 +513,16 @@ https://aws.amazon.com/rekognition/faqs/
 For each option, we rank them based on two scales: results and difficulty. We need to work out a definition for each of these. 
 
 Diego's comment: From what I learned so far, it could be easiness (an API is more straightforward than a library), number of characters correctly recognized, flexibility (the opposite of easiness), and cost. Moreover, some APIs such as Google's groups more than one character, whereas Azure returns only one character per boundary.
+
+In terms of flexibility...
+
+Sequence of the characters...
+
+Output given...xml, json, flat file, csv...
+
+NUmber of characters well recognized...(Accuracy)
+
+
 
 
 The main aspect of the end product will be a graph with two axis, and dots for where each service is positioned, coloured or faceted by the test.
