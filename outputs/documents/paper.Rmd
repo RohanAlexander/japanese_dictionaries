@@ -81,18 +81,34 @@ In this paper we review various OCR options for researchers who need to gather d
 
 ## Test Samples
 
-Japanese dictionaries...
+Japanese dictionaries...[Rohan]
 
-For the purpose of this study, one page from the letter a in the Japanese dictionary was taken to assess the tools. This image contains 3293 characters. Words in English were counted as one character for this analysis. MOreover, the sample text was divided into four images as it is illustrated in figure XX. These new images were assessed across all tools.
+For the purpose of this study, one page from the letter a in the Japanese dictionary was taken to assess the selected OCR tools. This image contains 3293 characters. Words in English were counted as one character for this analysis. MOreover, the sample text was divided into four images called **sections** as it is illustrated in figure XX. These new images were assessed across all OCR tools.
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/sections.png)
+![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/outputs/documents/sections.png)
 **Figure XX**
 
+
+This example is in a vertical form, meaning that it should be read it from right to left and from the top to the bottom. This is important since it is expected to obtain from each OCR tool the correct sequence of characters. FOr instance, from section 1 in figure xx, the first five characters from the first line are **[一本の傘を]**
+
+The following figures corresponds to each section extracted from the sample:
+
+![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/inputs/cropped%20pages/00-sample_pages_3_sec_1.png)
+**Figure XX Section 1**
+
+![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/inputs/cropped%20pages/00-sample_pages_3_sec_2.png)
+**Figure XX Section 2**
+
+![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/inputs/cropped%20pages/00-sample_pages_3_sec_3.png)
+**Figure XX Section 3**
+
+![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/inputs/cropped%20pages/00-sample_pages_3_sec_4.png)
+**Figure XX Section 4**
 
 ## OCR options
 
 
-The following list contains some of the OCR APIs and libraries available that will be evaluated in this study:
+The following list contains the OCR APIs and libraries available that will be evaluated in this study:
 
 
 
@@ -169,7 +185,7 @@ Here we have an example of the response:
 
 ### Language and Orientation
 
-Figure 1 presents a sample that corresponds to the section1 of the image containing Japanese text, but it also contains English text in some fragments of the text. The API offers the possibility to do self-detection, which in this case is helpful, but also the opportunity to specify the language in advance. Moreover, the orientation can also be self-detected or not.
+Figure 1 presents a sample that corresponds to the section 1 of the image containing Japanese text, but it also contains English text in some fragments of the text. The API offers the possibility to do self-detection, which in this case is helpful, but also the opportunity to specify the language in advance. Moreover, the orientation can also be self-detected or not.
 
 
 
@@ -220,15 +236,14 @@ The API is easy to use after reading the documentation. It offers an example of 
 
 Even though the API offers the possibility to self-detect the language, It changes the order in which the characters should be in the output. In figures 6 we can see that the first line provided by the self-detection approach is located in the middle. This situation does not allow a correct interpretation of the text because it does not follow the reading pattern. In this case, it is a vertical orientation, which means we have to read it from right to left.  
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure6_full.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/azure-images/self-detection.png)
  **Figure 6**
 
 When the parameter language is stated as Japanese since the beginning, as we can see in figure 7, it recognizes the first line correctly. 
 
-![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure7_full.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/azure-images/japanese-parameter.png)
  **Figure 7**
 
-In general, self-detection and the case with the language parameter as the Japanese do not generate the boundaries correctly. In Figures 6 and 7, we can observe that both cross the line, which is not correct for in this document. There is a line delimiting the boundaries of the text, but it has been ignored by both API calls. This situation makes it difficult for researchers to organize the information correctly as the order of the characters matter.
 
 
 
@@ -462,6 +477,8 @@ In terms of character-level recognition, we can observe that many characters are
 The most important advantage is that this is a free library. It is also a wrapper from Google's Tesseract Engine. Moreover, the way it presents the covered areas are very detailed. It offers blocks, paragraphs, lines, boundaries, and finally the character level. 
 
 #### Disadvantages
+
+Some lines were completely ignored by Pyteseract, even thought it was clear enough to be recognized by the tool.
 
 
 ## Kindai-OCR
