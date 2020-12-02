@@ -483,6 +483,45 @@ Some lines were completely ignored by Pyteseract, even thought it was clear enou
 
 ## Kindai-OCR
 
+According to the Center for Open Data in the Humanities, Kindai-OCR is an OCR system for modern Japanese documents. It was built under the N2I project that study state-of-the-art statistical models for OCR, and work on the development of infrastructure and providing open access to data. The datasets were constructed by the University of Tokyo Center for Education and Research and the National Institute of Japanese Language and are used for OCR machine learning. These datasets are commonly known as the Modern Magazine Datasets.
+
+The Kindai-OCR code was developed in Python and released as an open source code in August 2020 on Github..The Github folder contains all the necessary code and instructions to assess the OCR tool. **[not sure if it is necessary to mention the modification in the file test.py, in order to run the model using GPUs.]**
+
+After running the Kindai-OCR for our samples, the system generated two main outputs. They are explained as follows:
+
+### File result.xml
+
+This file is presented in an Extensible Markup Language (XML) format containing a tree with the identified lines, as well as the corresponding characters. An example of the is shown as follows:
+
+```{}
+<?xml version='1.0' encoding='Shift_JIS'?>
+<paper xmlns="http://codh.rois.ac.jp/modern-magazine/"><page dpi="100" file="00-sample_pages_3_sec_3.png" height="1040" number="1" width="2430"><line height="905" width="72" x="332" y="0">あいくるし發路事、愛くるし（形、</line><line height="1026" width="76" x="466" y="0">あいくち島（合巳。名。あれせも。ものよ</line><line height="1026" width="69" x="592" y="0">あいくすりし（（きき」名その人の爲に信身あ</line><line height="1031" width="65" x="660" y="0">あいきん（及兵」（名起しい得をうつし表しした</line><line height="1031" width="78" x="778" y="0">あいきん愛心。名客する東なふする、</line><line height="361" width="72" x="849" y="0">あいきよう對</line><line height="292" width="64" x="918" y="0">あいきよう</line><line height="1031" width="64" x="981" y="0">あいきよう對（愛婦（名（（（らきささ。（（彼。。</line><line height="292" width="64" x="2264" y="0">あいきまう</line><line height="997" width="69" x="1749" y="34">（愛教商）名」名毎金。造。。愛もがなてては立</line><line height="337" width="55" x="286" y="38">府がはゆらしい。</line><line height="930" width="68" x="407" y="38">くあふ人。○つばのない兌。。ヒ直。九五五五。</line>
+```
+
+After transforming this file into a dataframe form, we found that 238 lines with their corresponding characters, were generated. In figure XX we can see that the result.xml file provides information such as the corresponding level (paper, page, or line) in the tag column, the identified characters in the text column, the associated image the file column, among other attributes. 
+
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/kindai-images/xml-processed.png)   
+ **Figure XX**
+ 
+### New version of the image
+
+Kindai-OCR generated a new version of the image containing the identified lines and characters. An example is shown as follows in figure xx.
+
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/kindai-images/kindai-section1.jpg)
+**Figure XX**
+ 
+### Advantages and Disadvantages
+
+#### Advantages
+
+Same as libraries such as Pytesseract, one of The most important advantages is that it is a free tool. Moreover, the recognition process is very easy. To obtain results just by putting the images in the test folder and running the file called test.py on Python is enough to obtain the results.
+
+#### Disadvantages
+
+At the time of this assessment, the use of GPUs is required which is a limitation to take into account. For this study, we used Colab from Google, which offers this capability. 
+
+
 
 
 ## Kraken - Python Library
@@ -571,6 +610,11 @@ The main aspect of the end product will be a graph with two axis, and dots for w
 
 9: https://github.com/UB-Mannheim/tesseract/wiki
 
+10: http://codh.rois.ac.jp/software/kindai-ocr/
+
+11: https://github.com/ducanh841988/Kindai-OCR
+
+12: Anh Duc Le, Daichi Mochihashi, Katsuya Masuda, Hideki Mima, and Nam Tuan Ly. 2019. Recognition of Japanese historical text lines by an attention-based encoder-decoder and text line generation. In Proceedings of the 5th International Workshop on Historical Document Imaging and Processing (HIP ’19). Association for Computing Machinery, New York, NY, USA, 37–41. DOI:https://doi.org/10.1145/3352631.3352641
 
 
 
