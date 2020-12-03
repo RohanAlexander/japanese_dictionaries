@@ -371,13 +371,13 @@ Moreover, the API gives the opportunity to send the image in base64 format or us
 
 #### Disadvantages
 
-Unlike Azure Cognitive Services, which returns each recognized character individually, Google Vision groups characters in some cases. This situation adds some degree of complexity when processin the response from the API. **[Not sure if it is a disadvantage in real life]**
+Unlike Azure Cognitive Services, which returns each recognized character individually, Google Vision groups characters in some cases. This situation adds some degree of complexity when processing the response from the API. **[Not sure if it is a disadvantage in real life]**
 
 
 ## PyTesseract - Python Library
 
 
-Python-Tesseract is an optical character recognition (OCR) library for python. It is a wrapper for Google's Tesseract-OCR Engine. PyTesseract can read all image types such as png, jpeg, gif, tiff, BMP, among others. It is widely used to process everything from scanned documents. This inbuilt library of python performs the OCR techniques on the image to produce the digitized output text in a readable and editable form.
+Python-Tesseract is an optical character recognition (OCR) library for python. It is a wrapper for Google's Tesseract-OCR Engine. PyTesseract can read all image types such as png, jpeg, gif, tiff, BMP, among others. It is widely used to process everything from scanned documents. This inbuilt python library performs the OCR techniques on the image to produce the digitized output text in a readable and editable form.
 
 To use this library, we need to install Tesseract. For this study, we use version 4. IT is necessary to call the .exe file to use Tesseract with PyTesseract. See the following example.
 
@@ -417,12 +417,12 @@ image_to_data = pytesseract.image_to_data(img1, lang = 'jpn_vert')
 
 ```
 
-The output from the previous code converted into a pandas dataframe is shown in figure 11.
+The output from the previous code converted into a pandas dataframe is shown in figure xx.
 
 ![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure11.png)
-**Figure 11**
+**Figure xx**
 
-From figure 11, we can observe that the output in the column **level** generates five levels. Those are pages, blocks, paragraphs, lines, and words (characters). Each one is subsets of the previous one.
+From figure xx, we can observe that the output in the column **level** generates five levels. Those are pages, blocks, paragraphs, lines, and words (characters). Each one is a subset of the previous one.
 
 ### Page
 
@@ -440,34 +440,34 @@ The blocks are subsets of the page area that consist of small groups of recogniz
 
 ### Paragraphs
 
-Similar to the blocks, the paragraphs are subsets of blocks. These follow the same idea of subareas containing a set of characters. In this case, for example, we can look at paragraphs five and six, which are subsets of block five. It is interesting to see how the only paragraph (21) of block 12 is a smaller area compared to the block. This situation happens in several other blocks. See figure 14 for a better understanding.
+Similar to the blocks, the paragraphs are subsets of blocks. These follow the same idea of subareas containing a set of characters. In this case, for example, we can look at paragraphs three and four, which are subsets of block four (figure xx). It is interesting to see how the only paragraph four of block four is a very small area compared to its parent block. This situation happens in several other blocks. See figure xx for a better understanding.
 
 ![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/paragraphs.png)
-**Figure 14**
+**Figure xx**
 
 ### Lines
 
 
-Once the paragraphs are defined, the library provides in figure 15, the last subsets of characters called Lines. From the example, we can see that most of the characters are located in one of the lines. However, several others are not. Some of those cases are curious since there is no clear reason why those characters are not included. For instance, between the lines 65 and 66, two clear lines are not recognized by the library.
+Once the paragraphs are defined, the library provides in figure xx, the last subsets of characters called Lines. From the example, we can see that most of the characters are located in one of the lines. However, several others are not. For some cases there is no clear reason why those characters are not included. For instance, between the lines 14 and 15, two clear lines are not recognized by the library.
 
 
 ![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/lines.png)   
- **Figure 15**
+ **Figure xx**
 
 ### Character Boundaries
 
 
-These boundaries enclose the characters. Figure 16 shows that a character boundary can include one or more characters. However, some character boundaries overlap with other ones. Moreover, the same as the previous areas, several characters have been skipped with no apparent reason.
+These boundaries enclose the characters. Figure xx shows that a character boundary can include one or more characters. However, some character boundaries overlap each other. Moreover, same as the previous areas, several characters have been skipped with no apparent reason.
 
 ![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/boundaries.png)   
- **Figure 16**
+ **Figure xx**
 
 ### Characters
 
-In terms of character-level recognition, we can observe that many characters are not recognized. Interestingly those characters are in a correct block, paragraph, line, and character boundary, but it was skipped. For example, in the first line and the first character boundary of this line, there are two words, but one of them is not recognized. Figure 17 illustrates this case.
+In terms of character-level recognition, we can observe that many characters are not recognized. Interestingly those characters are in a correct block, paragraph, line, and character boundary, but it was skipped. For example, in the first line of recognized characters and the first character boundary of this line, there are two words, but one of them is not recognized. Figure xx illustrates this case.
 
 ![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/pytesseract-images/characters.png)   
- **Figure 17**
+ **Figure xx**
 
 ### Advantages and Disadvantages
 
@@ -477,20 +477,20 @@ The most important advantage is that this is a free library. It is also a wrappe
 
 #### Disadvantages
 
-Some lines were completely ignored by Pyteseract, even thought it was clear enough to be recognized by the tool.
+Some lines were completely ignored by Pyteseract, even thought it was clear enough to be recognized by the tool. Moreover, same as Google Vision, this library groups more than one character sometimes.
 
 
 ## Kindai-OCR
 
 According to the Center for Open Data in the Humanities, Kindai-OCR is an OCR system for modern Japanese documents. It was built under the N2I project that study state-of-the-art statistical models for OCR, and work on the development of infrastructure and providing open access to data. The datasets were constructed by the University of Tokyo Center for Education and Research and the National Institute of Japanese Language and are used for OCR machine learning. These datasets are commonly known as the Modern Magazine Datasets.
 
-The Kindai-OCR code was developed in Python and released as an open source code in August 2020 on Github..The Github folder contains all the necessary code and instructions to assess the OCR tool. **[not sure if it is necessary to mention the modification in the file test.py, in order to run the model using GPUs.]**
+The Kindai-OCR code was developed in Python and released as an open source code in August 2020 on Github. The Github folder contains all the necessary code and instructions to assess the OCR tool. **[not sure if it is necessary to mention the modification in the file test.py I did, in order to run the model using GPUs.]**
 
 After running the Kindai-OCR for our samples, the system generated two main outputs. They are explained as follows:
 
 ### File result.xml
 
-This file is presented in an Extensible Markup Language (XML) format containing a tree with the identified lines, as well as the corresponding characters. An example of the is shown as follows:
+This file is presented in an Extensible Markup Language (XML) format containing a tree with the identified lines, as well as the corresponding characters. An example of the xml file is shown as follows:
 
 ```{}
 <?xml version='1.0' encoding='Shift_JIS'?>
@@ -514,11 +514,11 @@ Kindai-OCR generated a new version of the image containing the identified lines 
 
 #### Advantages
 
-Same as libraries such as Pytesseract, one of The most important advantages is that it is a free tool. Moreover, the recognition process is very easy. To obtain results just by putting the images in the test folder and running the file called test.py on Python is enough to obtain the results.
+Same as libraries such as Pytesseract, one of The most important advantages is that it is a free tool. Moreover, the recognition process is very easy. To obtain results, just by putting the images in the test folder and running the file called test.py on Python is enough to obtain the results.
 
 #### Disadvantages
 
-At the time of this assessment, the use of GPUs is required which is a limitation to take into account. For this study, we used Colab from Google, which offers this capability. 
+At the time of this assessment, the use of GPUs is required which is a limitation to take into account. For this study, we used Colab from Google, which offers this capability. Moreover, Kindai-OCR returns the characters grouped by lines. They are not generated individually. 
 
 
 
@@ -528,11 +528,11 @@ At the time of this assessment, the use of GPUs is required which is a limitatio
 Kraken is a python library created by Benjamin Kiessling from Université PSL in France and Leipzig University. This library is a combination of a fork (independent development built on an existing one) from the Ocropus package and CLSTM neural network library. Its purpose was to improve accuracy and performance rates compared with Ocropus. It has been tested with languages such as Arabic, Persian, Syriac Polytonic Greek, Latin, among other. However, there is no information about japanese-trained models.  
 
 
-To assess the performance of this library, it is necessary to train a model for japanese texts. To do that, Kraken offers a  function called **train**. This function expects a series of images that according to Kraken´s website, these images must be high quality scans, preferably color or grayscale, and at least 300dpi. Images in PDF format are not allowed. Each image must be accompanied with a text file with extension .gt.txt. This file will contain the character(s) that corresponds to the image with the same name. For instance in figure xx we see the image file is called **sec1_line1.png**, the pair-wise text element for this image is **sec_line.gt.txt**.
+To assess the performance of this library, it is necessary to train a model for japanese texts. To do that, Kraken offers a  function called **train**. This function expects a series of images that according to Kraken´s website, these images must be high quality scans, preferably color or grayscale, and at least 300dpi. Images in PDF format are not allowed. Each image must be accompanied with a text file with extension .gt.txt. This file will contain the character(s) that correspond(s) to the image with the same name. For instance in figure xx we see the image file is called **sec1_line1.png**, the pair-wise text element for this image is **sec1_line1.gt.txt**.
 
 
 ![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/figure18.png)   
- **Figure 18**
+ **Figure xx**
  
 After the training stage, Kraken analyses the layout and extracts text lines from an input image for later processing by the recognition. A step by step process is provided by Kraken´s website (http://kraken.re/index.html) to recognize text from an image using the model we want. 
 
@@ -540,12 +540,12 @@ After the training stage, Kraken analyses the layout and extracts text lines fro
 
 ### Training process challenges
 
-The training process itself is very friendly. However, the data preparation is the most important part as it generates the samples we feed into the model. Other studies pointed out that for languages such as Arabic, at least 800 lines are required to train a descent model. For the Japanese text of this study we trained 36 lines in which several characters appear more than once. The result after the training process was not good, indicating that the need of greater sample data might be needed which is not in the scope of this study.
+The training process itself is very friendly. However, the data preparation is the most important part as it generates the samples we feed into the model. Other studies pointed out that for languages such as Arabic, at least 800 lines are required to train a descent model. For the Japanese text of this study we trained 36 lines in which several characters appear more than once. The result after the training process was not good, indicating that the need of greater sample data is needed, which is not in the scope of this study.
 
 
 # Other limitations
 
-In order to use this library it is required to have either Linux or Mac. In this study, we use Google Colab which is offers a Linux environment to assess the library.  
+In order to use this library it is required to have either Linux or Mac. In this study, we use Google Colab which offers a Linux environment to assess the library.  
 
 
 ## Amazon Textract
@@ -567,7 +567,7 @@ https://aws.amazon.com/rekognition/faqs/
 
 For each option, we rank them based on two scales: results and difficulty. We need to work out a definition for each of these. 
 
-Diego's comment: From what I learned so far, it could be easiness (an API is more straightforward than a library), number of characters correctly recognized, flexibility (the opposite of easiness), and cost. Moreover, some APIs such as Google's groups more than one character, whereas Azure returns only one character per boundary.
+Diego's comment: From what I learned so far, it could be easiness (an API is more straightforward than a library), number of characters correctly recognized, flexibility, and cost. Moreover, some APIs such as Google's groups more than one character, whereas Azure returns only one character per boundary.
 
 In terms of flexibility...
 
