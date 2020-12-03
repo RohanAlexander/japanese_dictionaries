@@ -85,7 +85,7 @@ Japanese dictionaries...[Rohan]
 
 For the purpose of this study, one page from the letter a in the Japanese dictionary was taken to assess the selected OCR tools. The image contains 3293 characters. Words in English were counted as one character for this analysis. MOreover, the sample text was divided into four images called **sections** as it is illustrated in figure XX. These new images were assessed across all OCR tools.
 
-![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/outputs/documents/sections.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/outputs/documents/sections.png)
 **Figure XX**
 
 
@@ -93,16 +93,16 @@ This example is in a vertical form, meaning that it should be read it from right
 
 The following figures corresponds to each section extracted from the sample:
 
-![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/inputs/cropped%20pages/00-sample_pages_3_sec_1.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/inputs/cropped%20pages/00-sample_pages_3_sec_1.png)
 **Figure XX Section 1**
 
-![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/inputs/cropped%20pages/00-sample_pages_3_sec_2.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/inputs/cropped pages/00-sample_pages_3_sec_2.png)
 **Figure XX Section 2**
 
-![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/inputs/cropped%20pages/00-sample_pages_3_sec_3.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/inputs/cropped pages/00-sample_pages_3_sec_3.png)
 **Figure XX Section 3**
 
-![image](https://raw.githubusercontent.com/RohanAlexander/japanese_dictionaries/master/inputs/cropped%20pages/00-sample_pages_3_sec_4.png)
+![image](E:/Users/Usuario/Documents/GitHub_Website/website/japanese_dictionaries/inputs/cropped pages/00-sample_pages_3_sec_4.png)
 **Figure XX Section 4**
 
 ## OCR options
@@ -565,6 +565,9 @@ https://aws.amazon.com/rekognition/faqs/
 # Evaluation
 
 
+
+
+
 For each option, we rank them based on two scales: results and difficulty. We need to work out a definition for each of these. 
 
 Diego's comment: From what I learned so far, it could be easiness (an API is more straightforward than a library), number of characters correctly recognized, flexibility, and cost. Moreover, some APIs such as Google's groups more than one character, whereas Azure returns only one character per boundary.
@@ -575,7 +578,7 @@ Sequence of the characters...
 
 Output given...xml, json, flat file, csv...
 
-NUmber of characters well recognized...(Accuracy)
+Number of characters well recognized...(Accuracy)
 
 
 
