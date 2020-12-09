@@ -1,0 +1,8 @@
+OCR Tool                    , Company		, Type           	, Price (August 2020),	Tech requirements
+Azure Cognitive Services	, Microsoft		, API		        , ,
+Amazon Rekognition			, Amazon		, API		        , ,
+PyTesseract					, Google		, Python library	, ,
+Kraken						, Open source	, Python library	, ,
+Google Vision				, Google		, API				, ,
+Amazon Textract	            , Amazon		, API				, ,
+Kindai-OCR                  , n2i Project	, Python library	, ,
