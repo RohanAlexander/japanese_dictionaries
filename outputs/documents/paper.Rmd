@@ -8,7 +8,6 @@ date: "12 December 2020"
 abstract: "We discuss the use of Optical Character Recognition (OCR) as a initial step in an applied research workflow. OCR is a way of converting images, for instance in a PDF file, into text and numbers that can then be analysed. We review a variety of methods and their relative merit. The choice between these approaches turns on the scale of the OCR required, the level of funding that is available, and the user's technical skills. We provide a hueristic to guide this decision and worked examples. Finally, we place this within the context of an illustrative applied research workflow detailing its relationship with other aspects of the workflow."
 output:
   bookdown::pdf_document2:
-    citation_package: natbib
     keep_tex: false
     fig_caption: true
     number_sections: true
@@ -30,7 +29,7 @@ library(tidyverse)
 
 # Introduction
 
-A crucial step in the data analysis workflow is gathering data. This step involves tools and methods to collect raw data in an systematic way. In this paper we are interested in gathering data from Portable Document Format (PDF) files, in particular, when these PDFs were created by scans, and hence must be processed before the data they contain can be prepared, cleaned, and analysed. Such PDF files are generally unstructured data, meaning that the data are not tagged nor organised in a regular way.^[Structured data is organized in a highly regular manner or a pre-defined data model where the regularities apply to all the data in a particular dataset. Some examples are tables and relations. Semi-structured data contains this same information, but instead of having regular structures applied to all items in the dataset, the data might be interpreted with structural information. It can be supplied as tags e.g. name = "Bob" but also other markers to separate semantic elements and enforce hierarchies of records and fields within the data. Unstructured data, such as texts or images, holds information with no explicit structured data, such as tags. However, these tags may be assigned using manual or automatic techniques, converting the unstructured data to semi-structured data [@Losee2006]. This diversity and complexity of data structures complicate, even more, the data gathering process as each data type may require a specific gathering approach(es) when needed.] While tags in the form of a text replacement for each character image could be assigned manually, typically a statistical model is used for reasons of efficiency and reproducibility, and this process is called Optical Character Recognition (OCR). We evaluate several pre-trained commercial OCR options accessed via APIs: 1) **X**, 2) **Y**, and 3) **Z**; additionally several pre-trained OCR options that we run ourselves: 4) **X**, 5) **Y**, and 6) **Z**; and finally 7) training and running our own model. We find... **[TBD]**.
+A crucial step in the data analysis workflow is gathering data. This step involves tools and methods to collect raw data in an systematic way. In this paper we are interested in gathering data from Portable Document Format (PDF) files, in particular, when these PDFs were created by scans, and hence must be processed before the data they contain can be prepared, cleaned, and analysed. Such PDF files are generally unstructured data, meaning that the data are not tagged nor organised in a regular way.^[Structured data is organized in a highly regular manner or a pre-defined data model where the regularities apply to all the data in a particular dataset. Some examples are tables and relations. Semi-structured data contains this same information, but instead of having regular structures applied to all items in the dataset, the data might be interpreted with structural information. It can be supplied as tags e.g. name = "Bob" but also other markers to separate semantic elements and enforce hierarchies of records and fields within the data. Unstructured data, such as texts or images, holds information with no explicit structured data, such as tags. However, these tags may be assigned using manual or automatic techniques, converting the unstructured data to semi-structured data [@Losee2006]. This diversity and complexity of data structures complicate, even more, the data gathering process as each data type may require a specific gathering approach(es) when needed.] While tags in the form of a text replacement for each character image could be assigned manually, typically a statistical model is used for reasons of efficiency and reproducibility, and this process is called Optical Character Recognition (OCR). We evaluate several pre-trained commercial OCR options accessed through proprietary APIs: 1) Abbyy, 2) Amazon Rekognition, 3) Amazon Textract, 4) Azure Cognitive Services, and 5) Google Vision; additionally several pre-trained and trainable OCR options that a user runs themselves: 6) Kindai OCR, 7) Kraken, and finally 8) Tesseract. We find... **[TBD]**.
 
 PDF files were developed in 1993 by the technology company Adobe and are useful for documents because they are meant to display in a consistent way independent of the environment that created them or the environment in which they are being viewed. A PDF viewed on an iPhone should look the same as on a Android phone, as on a Linux desktop. One feature of PDFs is that they can include a variety of objects, for instance, text, photos, figures, etc. However, this variety can limit the capacity of PDFs to be used directly as data inputs for statistical analysis. The data first needs to be extracted from the PDF.
 
@@ -48,7 +47,7 @@ In this paper we review various OCR options for data analysts who need to gather
 
 We find... **[TBD]**.
 
-Our paper is similar to @Rychlik2020 which focuses on Pashto, Farsi, and Traditional Chinese.
+Our paper is similar to @Rychlik2020 which focuses on Pashto, Farsi, and Traditional Chinese. Additional useful surveys include @Lombardi2020 and @Reul2019.
 
 The remainder of this paper is structured as follows... **[TBD]**. Finally we make some suggestions for what is needed in the future.
 
@@ -71,7 +70,7 @@ options %>%
 
 ```
 
-
+Abbyy
 
 Amazon Rekognition is a proprietary
 
@@ -81,9 +80,9 @@ Azure Cognitive Services
 
 Google Vision
 
-Kindai OCR [@Le2019] - https://github.com/ducanh841988/Kindai-OCR - is a pre-trained model that uses an attention based encoder-decoder approach specifically designed for Japanese historical documents. It is part of a larger research program on Japanese character recognition including @Horiuchi2009 and @Nguyen2017. This research program is complementary to research on historical Hanja (Korean) documents, for instance @Kim2004, and  historical Khmer (Cambodia) documents, for instance @Valy2020. @Le2019b provides broader consideration of issues with the recognition of historical Japanese, and related, characters including 'noised, damaged characters, and background', as well as the possibility that characters may be 'written in cursive and are connected'. The Center for Open Data in the Humanities - http://codh.rois.ac.jp - provides a large number of training datasets, and runs the n2i Project from which Kindai came out of. @Narang2020 provides an overview.
+Kindai OCR [@Le2019] - https://github.com/ducanh841988/Kindai-OCR - is a pre-trained model that uses an attention based encoder-decoder approach specifically designed for Japanese historical documents. It is part of a larger research program on Japanese character recognition including @Horiuchi2009 and @Nguyen2017. This research program is complementary to research on historical Hanja (Korean) documents, for instance @Kim2004, and  historical Khmer (Cambodia) documents, for instance @Valy2020. @Le2019b provides broader consideration of issues with the recognition of historical Japanese, and related, characters including 'noised, damaged characters, and background', as well as the possibility that characters may be 'written in cursive and are connected'. The Center for Open Data in the Humanities - http://codh.rois.ac.jp - provides a large number of training datasets, and runs the n2i Project from which Kindai came out of.
 
-Kraken
+OCRopus **[ADD CITE]** - https://github.com/ocropus/ocropy - is an open-source OCR engine initially developed in 2007 as 'a Google-sponsored project' [@Breuel2007]. Kraken **[ADD CITE]** - https://github.com/mittagessen/kraken - is an 'extensively rewritten fork of the OCRopus system' by Benjamin Kiessling [@Kiessling2019]. @Martinek2020 use Kraken to create 'an efficient domain-dependent OCR system that focuses on historical German documents by picking the best tools and approaches available'. Similarly, @Romanov2017 use Kraken to achieve 'accuracy rates for classical Arabic-script texts in the high nineties'.
 
 Tesseract **[ADD CITE]** - https://github.com/tesseract-ocr/tesseract - is an open-source OCR engine initially developed 'at HP between 1985 and 1995, shelved for 10 years, open-sources in 2006 and now developed mostly at Google' [@Smith2013]. It has had a variety of versions, with the latest being Tesseract 4 which added a 'neural net (LSTM) based OCR engine' [@tesseract2018]. Tesseract is a widely used OCR engine with a variety of implementations available including the default usage of command line, Python through the pytesseract package **[ADD CITE]** and R through the tesseract package [@Ooms2019] for which a useful starter example is @Rodrigues2019.
 
@@ -696,12 +695,10 @@ The main aspect of the end product will be a graph with two axis, and dots for w
 
 9: https://github.com/UB-Mannheim/tesseract/wiki
 
-10: http://codh.rois.ac.jp/software/kindai-ocr/
-
-11: https://github.com/ducanh841988/Kindai-OCR
 
 
 
+\newpage
 
 # References
 
