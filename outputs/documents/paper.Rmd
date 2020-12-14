@@ -4,7 +4,7 @@ author:
   - Rohan Alexander^[University of Toronto, rohan.alexander@utoronto.ca.]
   - John Tang^[University of Melbourne.]
   - Diego Mamanche Castellanos^[University of Toronto.]
-date: "12 December 2020"
+date: "14 December 2020"
 abstract: "We discuss the use of Optical Character Recognition (OCR) as a initial step in an applied research workflow. OCR is a way of converting images, for instance in a PDF file, into text and numbers that can then be analysed. We review a variety of methods and their relative merit. The choice between these approaches turns on the scale of the OCR required, the level of funding that is available, and the user's technical skills. We provide a hueristic to guide this decision and worked examples. Finally, we place this within the context of an illustrative applied research workflow detailing its relationship with other aspects of the workflow."
 output:
   bookdown::pdf_document2:
@@ -13,6 +13,7 @@ output:
     number_sections: true
     latex_engine: xelatex
     toc: false
+spacing: single
 bibliography: references.bib
 ---
 
@@ -33,11 +34,9 @@ A crucial step in the data analysis workflow is gathering data. This step involv
 
 PDF files were developed in 1993 by the technology company Adobe and are useful for documents because they are meant to display in a consistent way independent of the environment that created them or the environment in which they are being viewed. A PDF viewed on an iPhone should look the same as on a Android phone, as on a Linux desktop. One feature of PDFs is that they can include a variety of objects, for instance, text, photos, figures, etc. However, this variety can limit the capacity of PDFs to be used directly as data inputs for statistical analysis. The data first needs to be extracted from the PDF.
 
-Sometimes it is possible to copy and paste the data from the PDF. This is more likely when the PDF only contains simple text or regular tables. In particular, if the PDF has been created by an application such as Microsoft Word, or another document or form creation system, then often the text data can be extracted in this way because they are actually stored as text within the PDF. But it is not as easy if the text has been stored as an image which is then part of the PDF. This may be the case for PDFs produced through scans or photos of physical documents, and some older document preparation software.
+Sometimes it is possible to copy and paste the data from the PDF. This is more likely when the PDF only contains simple text or regular tables. In particular, if the PDF has been created by an application such as Microsoft Word, or another document or form creation system, then often the text data can be extracted in this way because they are actually stored as text within the PDF. But it is not as easy if the text has been stored as an image which is then part of the PDF. This may be the case for PDFs produced through scans or photos of physical documents, and some older document preparation software. Furthermore, there is a linguistic component that adds more complexity [@Kanagarathinam2019]. For instance, non-Latin characters such as Japanese, Chinese, Arabic, among others, generate several difficulties in different stages of the text mining process. Not only do these languages have complicated structures and a large number of categories (for instance, compare the 26 characters in the English alphabet with the thousands of characters in Japanese kanji). But often many characters are similar and fonts may have a large effect. In those cases, the need for reliable approaches to replace an image containing many characters with text of those characters becomes important.
 
-**[The ideas for this paragraph are coming from K.Karthick, K.B.Ravindrakumar, R.Francis, S.Ilankannan = Steps Involved in Text Recognition and Recent Research in OCR. Preprocessing/Factors Affecting the Text Recognition Quality, Chinese Character Recognition, and Arabic Character Recognition as Japanese shared several similarities with Chinese such as Kanji. It is in references folder as F2670037619.pdf]** Furthermore, there is a linguistic component that adds more complexity. For instance, non-Latin characters such as Japanese, Chinese, Arabic, among others, generate several difficulties in different stages of the text mining process **[DIEGO - add cite = same as above]**. Not only do these languages have complicated structures and a large number of categories (for instance, compare the 26 characters in the English alphabet with the thousands of characters in Japanese kanji). But often many characters are similar and fonts may have a large effect **[DIEGO - add cite = same as above]**. In those cases, the need for reliable approaches to replace an image containing many characters with text of those characters becomes important.
-
-Optical character recognition (OCR) is a process that transforms a image of text into actual text. Although there may not be much difference to a human reading a PDF before and after OCR, the main difference is that the PDF is now machine-readable **[This paragraph is comming from Cheriet2007 p. X, Character Recognition Systems: A Guide for Students and Practioners, Chapter 1. It is in references folder as 2007+Character_Recognitio+Pages=[1-4].pdf]**. OCR has been used to parse images of characters since the 1950s, initially using physical processes **[Same as the previous one]**. Such approaches were understandably slow and have been replaced by a computer-based recognition system involving the following steps [@Cheriet2007 p. X]:
+Optical character recognition (OCR) is a process that transforms a image of text into actual text. Although there may not be much difference to a human reading a PDF before and after OCR, the main difference is that the PDF is now machine-readable [@Cheriet2007]. OCR has been used to parse images of characters since the 1950s, initially using physical processes. Such approaches were understandably slow and have been replaced by a computer-based recognition system involving the following steps [@Cheriet2007 p. 4]:
 
 - Pre-processing to both: increase the quality of the input image, and to focus on the data of interest.
 - Feature extraction to identify the distinctive features of the characters to be recognized.
@@ -59,7 +58,7 @@ The remainder of this paper is structured as follows... **[TBD]**. Finally we ma
 
 # Background
 
-In this section we introduce the OCR options that we consider, their essential features, and cost. There are **seven** OCR options evaluated in this study (Table \@ref(tab:tableofoptions)).
+In this section we introduce the OCR options that we consider, their essential features, and cost. There are **eight** **[UPDATE]** OCR options evaluated in this study (Table \@ref(tab:tableofoptions)).
 
 ```{r tableofoptions, echo=FALSE, warning = FALSE, message = FALSE}
 options <- read_csv(here::here("inputs/ocr_options.csv"))
@@ -69,6 +68,8 @@ options %>%
                )
 
 ```
+
+The gold-standard in terms of quality is a manual approach. For instance, a team of research assistants who were paid to inspect each page, inputting the correct element and checking the inputs of others will likely provide the best recognition. While this option is only possible for smaller datasets and is not reproducible, sharing high-quality datasets created in this way is important for evaluating the output of automated approaches.
 
 Abbyy
 
@@ -82,62 +83,42 @@ Google Vision
 
 Kindai OCR [@Le2019] - https://github.com/ducanh841988/Kindai-OCR - is a pre-trained model that uses an attention based encoder-decoder approach specifically designed for Japanese historical documents. It is part of a larger research program on Japanese character recognition including @Horiuchi2009 and @Nguyen2017. This research program is complementary to research on historical Hanja (Korean) documents, for instance @Kim2004, and  historical Khmer (Cambodia) documents, for instance @Valy2020. @Le2019b provides broader consideration of issues with the recognition of historical Japanese, and related, characters including 'noised, damaged characters, and background', as well as the possibility that characters may be 'written in cursive and are connected'. The Center for Open Data in the Humanities - http://codh.rois.ac.jp - provides a large number of training datasets, and runs the n2i Project from which Kindai came out of.
 
-OCRopus **[ADD CITE]** - https://github.com/ocropus/ocropy - is an open-source OCR engine initially developed in 2007 as 'a Google-sponsored project' [@Breuel2007]. Kraken **[ADD CITE]** - https://github.com/mittagessen/kraken - is an 'extensively rewritten fork of the OCRopus system' by Benjamin Kiessling [@Kiessling2019]. @Martinek2020 use Kraken to create 'an efficient domain-dependent OCR system that focuses on historical German documents by picking the best tools and approaches available'. Similarly, @Romanov2017 use Kraken to achieve 'accuracy rates for classical Arabic-script texts in the high nineties'.
+OCRopus - https://github.com/ocropus/ocropy - is an open-source OCR engine initially developed in 2007 as 'a Google-sponsored project' [@Breuel2007]. Kraken - https://github.com/mittagessen/kraken - is an 'extensively rewritten fork of the OCRopus system' by Benjamin Kiessling [@Kiessling2019]. @Martinek2020 use Kraken to create 'an efficient domain-dependent OCR system that focuses on historical German documents by picking the best tools and approaches available'. Similarly, @Romanov2017 use Kraken to achieve 'accuracy rates for classical Arabic-script texts in the high nineties'.
 
-Tesseract **[ADD CITE]** - https://github.com/tesseract-ocr/tesseract - is an open-source OCR engine initially developed 'at HP between 1985 and 1995, shelved for 10 years, open-sources in 2006 and now developed mostly at Google' [@Smith2013]. It has had a variety of versions, with the latest being Tesseract 4 which added a 'neural net (LSTM) based OCR engine' [@tesseract2018]. Tesseract is a widely used OCR engine with a variety of implementations available including the default usage of command line, Python through the pytesseract package **[ADD CITE]** and R through the tesseract package [@Ooms2019] for which a useful starter example is @Rodrigues2019.
+Tesseract - https://github.com/tesseract-ocr/tesseract - is an open-source OCR engine initially developed 'at HP between 1985 and 1995, shelved for 10 years, open-sources in 2006 and now developed mostly at Google' [@Smith2013]. It has had a variety of versions, with the latest being Tesseract 4 which added a 'neural net (LSTM) based OCR engine' [@tesseract2018]. Tesseract is a widely used OCR engine with a variety of implementations available including the default usage of command line, Python through the pytesseract package **[ADD CITE]** and R through the tesseract package [@Ooms2019] for which a useful starter example is @Rodrigues2019.
 
 
-
-There are two additional approaches that researchers may also consider: manual and roll-your-own. In the manual approach, teams of research assistants are paid to inspect each page and input the correct element. This is likely the gold-standard in terms of accuracy, however it is only approach for smaller datasets, and is not reproducible. Finally, as the statistics underlying the approaches mentioned above are within the capacity of many researchers it is tempting to conclude that one should write one's own OCR engine. Don't do this.
 
 
 
 
 # Data
 
-## Modern English
+## Book in English
 
 **TBD.**
 
 ## Table of numbers
 
+A common reason for wanting to 
 **TBD.**
 
 ## Modern Japanese
 
 **TBD.**
 
-## English book from the 1800s
-
-**TBD.**
-
 ## Japanese dictionaries from the early 1900s
 
-For the purpose of this study, one page from the letter a in the Japanese dictionary was taken to assess the selected OCR tools. The image contains 3293 characters. Words in English were counted as one character for this analysis. Moreover, the sample text was divided into four images called **sections** as illustrated in Figure \@ref(fig:sections). These new images were assessed across all OCR tools.
+**[JOHN: Add a para about the origin of this dictionary.]**
 
-```{r sections, echo=FALSE, fig.cap="UPDATE CAPTION", out.width = '90%'}
-knitr::include_graphics(here::here("outputs/documents/sections.png"))
+Here we focus on a page focused on 'a', which is あ in hiragana or ア in katakana Figure \@ref(fig:japanesedictionaryfirstpage).
+
+```{r japanesedictionaryfirstpage, echo=FALSE, fig.cap="A page from an early 1900s Japanese dictionary.", out.width = '90%', fig.align="center"}
+knitr::include_graphics(here::here("inputs/japanese_dictionaries/sample_page.png"))
 ```
 
-This example is in a vertical form, meaning that it should be read it from right to left and from the top to the bottom. This is important since it is expected to obtain from each OCR tool the correct sequence of characters. For instance, from section 1 in Figure \@ref(fig:section1), the first five characters from the first line are **[一本の傘を]**. We expect to see the same sequence from each OCR tool.
+This page has several features of interest. Firstly, it is in vertical form and should be read from right to left. This means that the first five characters that we expect from an OCR output are: 一本の傘を. The page is divided into four rows of content. An OCR workflow will need to take this into account during the pre-processing stage. In total, this page contains 3,293 characters, and while a majority of them are Japanese, there are still 99 English characters. Finally, there are also important nuances in terms of punctuation. For instance, certain types of brackets - **[ADD AN EXAMPLE]** - contain the origin of the word.
 
-The following figures corresponds to each section extracted from the sample:
-
-```{r section1, echo=FALSE, fig.cap="UPDATE CAPTION", out.width = '90%'}
-knitr::include_graphics(here::here("inputs/cropped_pages/00-sample_pages_3_sec_1.png"))
-```
-
-```{r section2, echo=FALSE, fig.cap="UPDATE CAPTION", out.width = '90%'}
-knitr::include_graphics(here::here("inputs/cropped_pages/00-sample_pages_3_sec_2.png"))
-```
-
-```{r section3, echo=FALSE, fig.cap="UPDATE CAPTION", out.width = '90%'}
-knitr::include_graphics(here::here("inputs/cropped_pages/00-sample_pages_3_sec_3.png"))
-```
-
-```{r section4, echo=FALSE, fig.cap="UPDATE CAPTION", out.width = '90%'}
-knitr::include_graphics(here::here("inputs/cropped_pages/00-sample_pages_3_sec_4.png"))
-```
 
 
 
