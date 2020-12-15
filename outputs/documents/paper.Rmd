@@ -30,7 +30,7 @@ library(tidyverse)
 
 # Introduction
 
-A crucial step in the data analysis workflow is gathering data. This step involves tools and methods to collect raw data in an systematic way. In this paper we are interested in gathering data from Portable Document Format (PDF) files, in particular, when these PDFs were created by scans, and hence must be processed before the data they contain can be prepared, cleaned, and analysed. Such PDF files are generally unstructured data, meaning that the data are not tagged nor organised in a regular way.^[Structured data is organized in a highly regular manner or a pre-defined data model where the regularities apply to all the data in a particular dataset. Some examples are tables and relations. Semi-structured data contains this same information, but instead of having regular structures applied to all items in the dataset, the data might be interpreted with structural information. It can be supplied as tags e.g. name = "Bob" but also other markers to separate semantic elements and enforce hierarchies of records and fields within the data. Unstructured data, such as texts or images, holds information with no explicit structured data, such as tags. However, these tags may be assigned using manual or automatic techniques, converting the unstructured data to semi-structured data [@Losee2006]. This diversity and complexity of data structures complicate, even more, the data gathering process as each data type may require a specific gathering approach(es) when needed.] While tags in the form of a text replacement for each character image could be assigned manually, typically a statistical model is used for reasons of efficiency and reproducibility, and this process is called Optical Character Recognition (OCR). We evaluate several pre-trained commercial OCR options accessed through proprietary APIs: 1) Abbyy, 2) Amazon Rekognition, 3) Amazon Textract, 4) Azure Cognitive Services, and 5) Google Vision; additionally several pre-trained and trainable OCR options that a user runs themselves: 6) Kindai OCR, 7) Kraken, and finally 8) Tesseract. We find... **[TBD]**.
+A crucial step in the data analysis workflow is gathering data. This step involves tools and methods to collect raw data in an systematic way. In this paper we are interested in gathering data from Portable Document Format (PDF) files, in particular, when these PDFs were created by scans, and hence must be processed before the data they contain can be prepared, cleaned, and analysed. Such PDF files are generally unstructured data, meaning that the data are not tagged nor organised in a regular way.^[@Losee2006 describes how structured data have a highly-regular organization or a there is some pre-defined data model where regularities apply to everything in a dataset, for instance a table. @Losee2006 further describes how semi-structured data contains this same information, but instead of a regular structure that applies to the entire dataset, there may be some structural information, for instance, tags such as 'name = "Bob"', or some other marker. Finally, unstructured data, such as texts or images, holds information with no explicit structured data. However, tags may be assigned using manual or automatic techniques, converting the unstructured data to semi-structured data. The diversity of possible data structures complicates the data gathering process as each may need a specific approach.] While tags in the form of a text replacement for each character image could be assigned manually, typically a statistical model is used for reasons of efficiency and reproducibility, and this process is called Optical Character Recognition (OCR). We evaluate several pre-trained commercial OCR options accessed through proprietary APIs: 1) Abbyy, 2) Amazon Textract, 3) Azure Cognitive Services, and 4) Google Vision; additionally several pre-trained and trainable OCR options that a user runs themselves: 5) Kindai OCR, 6) Kraken, and finally 7) Tesseract. We find... **[TBD]**.
 
 PDF files were developed in 1993 by the technology company Adobe and are useful for documents because they are meant to display in a consistent way independent of the environment that created them or the environment in which they are being viewed. A PDF viewed on an iPhone should look the same as on a Android phone, as on a Linux desktop. One feature of PDFs is that they can include a variety of objects, for instance, text, photos, figures, etc. However, this variety can limit the capacity of PDFs to be used directly as data inputs for statistical analysis. The data first needs to be extracted from the PDF.
 
@@ -58,34 +58,35 @@ The remainder of this paper is structured as follows... **[TBD]**. Finally we ma
 
 # Background
 
-In this section we introduce the OCR options that we consider, their essential features, and cost. There are **eight** **[UPDATE]** OCR options evaluated in this study (Table \@ref(tab:tableofoptions)).
+In this section we introduce the OCR options that we consider, their essential features, and cost. There are **seven** **[UPDATE]** OCR options evaluated in detail in this study (Table \@ref(tab:tableofoptions)).
 
 ```{r tableofoptions, echo=FALSE, warning = FALSE, message = FALSE}
 options <- read_csv(here::here("inputs/ocr_options.csv"))
 options %>% 
   knitr::kable(booktabs = TRUE, 
                caption = "OCR options",
+               linesep = ""
                )
 
 ```
 
 The gold-standard in terms of quality is a manual approach. For instance, a team of research assistants who were paid to inspect each page, inputting the correct element and checking the inputs of others will likely provide the best recognition. While this option is only possible for smaller datasets and is not reproducible, sharing high-quality datasets created in this way is important for evaluating the output of automated approaches.
 
-Abbyy
+ABBYY - https://www.abbyy.com - is a private company that has conducted OCR through the product FineReader since 1993. FineReader has a variety of options that can be useful.There are a variety of options in terms of using FineReader including downloading an application locally, accessing it online, or using an iPhone app. The iPhone app can be especially useful when the item that is being scanned should not have its pages separated or even be fully flattened for scanning because it uses the camera. FineReader is capable of manual 'training' for instance, a user is able to identify unrecognised items. There are a variety of different prices depending on the application. FineReader online requires an annual subscription that allows for 5,000 pages for \$149 (USD), FineReader for Mac is \$150 (CAD).
 
-Amazon Rekognition is a proprietary
+Amazon Textract - https://aws.amazon.com/textract/ - is an OCR application that is available through the Amazon. It can be accessed via an API or through Amazon Web Services (AWS). Textract is limited to only English for handwriting and even the printed text languages that Textract can detect are limited to English, Spanish, Italian, French, Portuguese and German [@amazontextractwebsite]. Helpfully, the output can be put into a workflow such that low confidence recognitions can be automatically reviewed by a human. Textract requires a subscription and on a monthly basis the cost begins at \$1.50 per 1,000 pages for documents with text, and \$15.00 for documents with tables.
 
-Amazon Textract
+Microsoft Azure Cognitive Services provides OCR through the Computer Vision application - https://azure.microsoft.com/en-us/services/cognitive-services/computer-vision/ [@citeazuredocs]. It is access via an API and handwriting OCR is only available for English, however printed OCR is available for a wide variety of languages including more complicated languages such as Arabic, Chinese, and Japanese. Mixed languages are also possible. The cost to use the API begins at \$1.50 per 1,000 pages. 
 
-Azure Cognitive Services
-
-Google Vision
+Google Vision API - https://cloud.google.com/vision - is an OCR application for a wide variety of printed languages including those of Azure. It is available through an API. The cost to use the API begins at \$1.50 per 1,000 pages [@citegooglevision]. 
 
 Kindai OCR [@Le2019] - https://github.com/ducanh841988/Kindai-OCR - is a pre-trained model that uses an attention based encoder-decoder approach specifically designed for Japanese historical documents. It is part of a larger research program on Japanese character recognition including @Horiuchi2009 and @Nguyen2017. This research program is complementary to research on historical Hanja (Korean) documents, for instance @Kim2004, and  historical Khmer (Cambodia) documents, for instance @Valy2020. @Le2019b provides broader consideration of issues with the recognition of historical Japanese, and related, characters including 'noised, damaged characters, and background', as well as the possibility that characters may be 'written in cursive and are connected'. The Center for Open Data in the Humanities - http://codh.rois.ac.jp - provides a large number of training datasets, and runs the n2i Project from which Kindai came out of.
 
 OCRopus - https://github.com/ocropus/ocropy - is an open-source OCR engine initially developed in 2007 as 'a Google-sponsored project' [@Breuel2007]. Kraken - https://github.com/mittagessen/kraken - is an 'extensively rewritten fork of the OCRopus system' by Benjamin Kiessling [@Kiessling2019]. @Martinek2020 use Kraken to create 'an efficient domain-dependent OCR system that focuses on historical German documents by picking the best tools and approaches available'. Similarly, @Romanov2017 use Kraken to achieve 'accuracy rates for classical Arabic-script texts in the high nineties'.
 
-Tesseract - https://github.com/tesseract-ocr/tesseract - is an open-source OCR engine initially developed 'at HP between 1985 and 1995, shelved for 10 years, open-sources in 2006 and now developed mostly at Google' [@Smith2013]. It has had a variety of versions, with the latest being Tesseract 4 which added a 'neural net (LSTM) based OCR engine' [@tesseract2018]. Tesseract is a widely used OCR engine with a variety of implementations available including the default usage of command line, Python through the pytesseract package **[ADD CITE]** and R through the tesseract package [@Ooms2019] for which a useful starter example is @Rodrigues2019.
+Tesseract - https://github.com/tesseract-ocr/tesseract - is an open-source OCR engine initially developed 'at HP between 1985 and 1995, shelved for 10 years, open-sources in 2006 and now developed mostly at Google' [@Smith2013]. It has had a variety of versions, with the latest being Tesseract 4 which added a 'neural net (LSTM) based OCR engine' [@tesseract2018]. Tesseract is a widely used OCR engine with a variety of implementations available including the default usage of command line, Python through the pytesseract package **[ADD CITE]** and R through the Tesseract package [@Ooms2019] for which a useful starter example is @Rodrigues2019.
+
+There are various other options that we considered, but ultimately did not evaluate in a serious way. The first of this is Amazon Rekognition - https://aws.amazon.com/rekognition/ - which is a **[ADD description]**. However, the service only recognizes up to 50 characters per image. As this is too small for most OCR applications in academia we did not further explore this service. 
 
 
 
@@ -96,16 +97,26 @@ Tesseract - https://github.com/tesseract-ocr/tesseract - is an open-source OCR e
 
 ## Book in English
 
-**TBD.**
+We may be interested in the text from a book itself. In that circumstance, we'd often have scans of pages of each book, for instance as illustrated in Figure \@ref(fig:janeeyre) illustrates a page containing a table from @Bronte1847.
+
+```{r janeeyre, echo=FALSE, fig.cap="A scanned page from a book.", out.width = '70%', fig.align="center"}
+knitr::include_graphics(here::here("inputs/jane_eyre/sample_page.png"))
+```
+
+Scanned pages of text from books will typically have some different fonts that need to be considered. They may also have page numbers and illustrations. Finally they may have various Pages of text Tables typically have several interesting features with regard to OCR. They typically have a page number and a title, both of which may or may not be important. They are then typically arranged in ordered rows and columns, which may or may not have lines separating them. Some of the cells may have symbols in them that may relate to footnotes at the end of the table. And finally, they may have additional comments and notes at the end of the table. 
+
+
 
 ## Table of numbers
 
-A common reason for wanting to 
-**TBD.**
+A common reason for wanting to OCR a document is to use the tables that are contained in old books. Figure \@ref(fig:bowleytable) illustrates a page containing a table from @Bowley1902
 
-## Modern Japanese
+```{r bowleytable, echo=FALSE, fig.cap="A scanned table from a book.", out.width = '80%', fig.align="center"}
+knitr::include_graphics(here::here("inputs/bowley/sample_table.png"))
+```
 
-**TBD.**
+Tables typically have several interesting features with regard to OCR. They typically have a page number and a title, both of which may or may not be important. They are then typically arranged in ordered rows and columns, which may or may not have lines separating them. Some of the cells may have symbols in them that may relate to footnotes at the end of the table. And finally, they may have additional comments and notes at the end of the table. 
+
 
 ## Japanese dictionaries from the early 1900s
 
@@ -128,11 +139,11 @@ This page has several features of interest. Firstly, it is in vertical form and 
 
 
 
-## Azure Corgnitive Services - Computer Vision OCR
+## Azure Cognitive Services - Computer Vision OCR
 
 Among the Microsoft Azure's portfolio, Azure Cognitive Services offers Computer Vision, an API that processes images and returns information based on the visual features the user is interested in. Those services comprise object detection of an image, visual features tagging, image categorization, Optical Character Recognition (OCR), among $others^4$. The OCR API processes an image and returns the language of the document, orientation, regions, lines, boundaries, and finally, the characters. 
 
-In python we need several libraries for calling the API.
+In Python we need several libraries for calling the API.
 
 ```{python eval=FALSE, include=TRUE}
 import os
@@ -602,7 +613,7 @@ After the training stage, Kraken analyses the layout and extracts text lines fro
 The training process itself is very friendly. However, the data preparation is the most important part as it generates the samples we feed into the model. Other studies pointed out that for languages such as Arabic, at least 800 lines are required to train a descent model. For the Japanese text of this study we trained 36 lines in which several characters appear more than once. The result after the training process was not good, indicating that the need of greater sample data is needed, which is not in the scope of this study.
 
 
-# Other limitations
+### Other limitations
 
 In order to use this library it is required to have either Linux or Mac. In this study, we use Google Colab which offers a Linux environment to assess the library.  
 
@@ -614,11 +625,6 @@ According to Amazon's website, Amazon Textract can detect Latin-script character
 https://aws.amazon.com/textract/faqs/
 
 
-## Amazon Rekognition
-
-According to Amazon's website, Amazon Rekognition supports text in most Latin scripts and numbers. Text detection recognizes up to 50 sequences of characters per the image or video frame and lists them as words and lines.
-
-https://aws.amazon.com/rekognition/faqs/
 
 
 

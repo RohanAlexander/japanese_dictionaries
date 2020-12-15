@@ -1,9 +1,8 @@
-OCR Tool                    , Company		, Type           					, Price (December 2020)	,	Tech requirements
-Abbyy						, Abbyy			, Proprietory API					, 						,
-Amazon Rekognition			, Amazon		, Proprietory API					, 						,
-Amazon Textract	            , Amazon		, Proprietory API					, 						,
-Azure Cognitive Services	, Microsoft		, Proprietory API					, 						,
-Google Vision				, Google		, Proprietory API 					, 						,
-Kindai OCR                  , n2i Project	, Open source pre-trained OCR model	, 						,
-Kraken						, Open source	, Open source OCR engine			, 						,
-Tesseract					, Open source	, Open source OCR engine			, 						,
+OCR Tool                    , Company		, Type           					, Technical requirements
+FineReader					, Abbyy			, Proprietary API					, Low
+Textract	            	, Amazon		, Proprietary API					, Medium
+Azure Cognitive Services	, Microsoft		, Proprietary API					, Medium
+Vision						, Google		, Proprietary API 					, Medium
+Kindai                  	, n2i Project	, Open source pre-trained OCR model	, High
+Kraken						, Open source	, Open source OCR engine			, High
+Tesseract					, Open source	, Open source OCR engine			, Medium
